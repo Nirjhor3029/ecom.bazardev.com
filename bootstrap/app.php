@@ -1,5 +1,7 @@
 <?php
 
+use App\Exceptions\ApiException;
+use App\Exceptions\PriceChangedException;
 use App\Modules\Core\Http\Middleware\EnsureFeatureEnabled;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -31,6 +33,30 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen($isApi);
 
         // SRS 3.3: every API error follows the { "error": { code, message, ... } } envelope.
+        $exceptions->render(function (ApiException $e, Request $request) use ($isApi) {
+            if (! $isApi($request)) {
+                return null;
+            }
+
+            return response()->json([
+                'error' => array_filter([
+                    'code' => $e->errorCode,
+                    'message' => $e->getMessage(),
+                    'details' => $e->details ?: null,
+                ]),
+            ], $e->status);
+        });
+
+        $exceptions->render(function (PriceChangedException $e, Request $request) use ($isApi) {
+            if (! $isApi($request)) {
+                return null;
+            }
+
+            return response()->json([
+                'error' => ['code' => 'PRICE_CHANGED', 'message' => $e->getMessage(), 'details' => ['new_total' => $e->newTotal]],
+            ], 409);
+        });
+
         $exceptions->render(function (ValidationException $e, Request $request) use ($isApi) {
             if (! $isApi($request)) {
                 return null;

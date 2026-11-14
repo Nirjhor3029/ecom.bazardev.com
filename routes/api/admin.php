@@ -4,6 +4,7 @@ use App\Modules\Catalog\Http\Controllers\Admin\BrandController;
 use App\Modules\Catalog\Http\Controllers\Admin\CategoryController;
 use App\Modules\Catalog\Http\Controllers\Admin\ProductController;
 use App\Modules\Core\Http\Controllers\Admin\AuthController;
+use App\Modules\Orders\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -22,4 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('products/{product}/variants', [ProductController::class, 'storeVariant']);
     Route::patch('products/{product}/variants/{variant}', [ProductController::class, 'updateVariant']);
     Route::delete('products/{product}/variants/{variant}', [ProductController::class, 'destroyVariant']);
+
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::get('orders/{order}', [OrderController::class, 'show']);
+    Route::post('orders/{order}/transition', [OrderController::class, 'transition']);
+    Route::post('orders/{order}/shipments', [OrderController::class, 'bookShipment']);
 });

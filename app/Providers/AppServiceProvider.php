@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Modules\Notifications\Contracts\SmsProvider;
+use App\Modules\Notifications\Drivers\LogSmsProvider;
+use App\Modules\Shipping\Contracts\Courier;
+use App\Modules\Shipping\Drivers\NullCourier;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -14,7 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // ARC-5: swap these bindings for a real driver once SRS §11 open
+        // items (SMS provider, courier) are decided — nothing else changes.
+        $this->app->bind(SmsProvider::class, LogSmsProvider::class);
+        $this->app->bind(Courier::class, NullCourier::class);
     }
 
     /**
