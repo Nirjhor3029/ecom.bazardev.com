@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="bn" class="h-full bg-stone-50">
+<html lang="bn" class="h-full bg-surface">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Bazardev Ecom')</title>
+    <title>@yield('title', 'মধুবন — Madhuban Artisanal Provisions')</title>
     <meta name="description" content="@yield('description', 'খাঁটি মধু ও বাদাম, ঘরে বসে অর্ডার করুন — ক্যাশ অন ডেলিভারি।')">
 
     {{-- Madhuban storefront design system fonts (home/product pages) — see resources/css/app.css --theme tokens --}}
@@ -14,7 +14,7 @@
 
     @vite(['resources/css/app.css'])
 </head>
-<body class="flex h-full flex-col font-sans text-stone-800">
+<body class="flex h-full flex-col font-body-md text-on-surface bg-surface">
     @include('storefront.partials.header')
 
     <main class="flex-1 w-full pt-36 pb-28 lg:pb-0 bg-surface min-h-screen">

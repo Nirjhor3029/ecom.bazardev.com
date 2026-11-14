@@ -1,76 +1,86 @@
 @extends('storefront.layout')
 
-@section('title', 'চেকআউট — Bazardev Ecom')
+@section('title', 'চেকআউট — মধুবন')
 
 @section('content')
-<div class="mx-auto max-w-4xl px-4 py-8 sm:px-6">
-    <h1 class="text-xl font-semibold text-stone-900">চেকআউট</h1>
+<div class="max-w-4xl mx-auto px-6 lg:px-12 py-10">
+    <div class="mb-8">
+        <span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block mb-2">অর্ডার সম্পন্ন করুন</span>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold">চেকআউট</h1>
+    </div>
 
     @if ($cart->items->isEmpty())
-        <p class="mt-6 text-stone-500">আপনার কার্ট খালি। <a href="{{ route('products.index') }}" class="text-amber-700 hover:underline">কেনাকাটা করুন</a></p>
+        <p class="font-body-md text-body-md text-on-surface-variant">আপনার কার্ট খালি। <a href="{{ route('products.index') }}" class="text-primary font-bold hover:underline">কেনাকাটা করুন</a></p>
     @elseif (! $customer)
-        <!-- Step 1: phone verification (CHK-R1) -->
-        <div class="mt-6 max-w-sm rounded-xl border border-stone-200 bg-white p-6">
-            <p class="text-sm text-stone-600">অর্ডার করতে প্রথমে আপনার মোবাইল নাম্বার verify করুন।</p>
-            <form action="{{ route('checkout.otp.send') }}" method="POST" class="mt-4 space-y-3">
+        {{-- Step 1: phone verification (CHK-R1) --}}
+        <div class="max-w-sm rounded-2xl bg-surface-container-lowest p-6 shadow-sm">
+            <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">অর্ডার করতে প্রথমে আপনার মোবাইল নাম্বার verify করুন।</p>
+            <form action="{{ route('checkout.otp.send') }}" method="POST" class="space-y-3">
                 @csrf
                 <input name="phone" placeholder="01XXXXXXXXX" required
-                    class="w-full rounded-md border border-stone-300 px-3 py-2 text-sm">
-                <button class="w-full rounded-full bg-amber-700 py-2.5 font-medium text-white hover:bg-amber-800">OTP পাঠান</button>
+                    class="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container">
+                <button class="w-full py-2.5 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors font-label-md text-label-md">OTP পাঠান</button>
             </form>
         </div>
     @else
-        <div class="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-3">
-            <form action="{{ route('checkout.show') }}" method="GET" class="sm:col-span-2 space-y-4 rounded-xl border border-stone-200 bg-white p-6">
+        <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm max-w-md">
+            <form action="{{ route('checkout.show') }}" method="GET" class="space-y-3">
                 {{-- GET form just to recompute the delivery quote; the real place-order form is below --}}
-                <h2 class="font-medium text-stone-900">ডেলিভারি তথ্য</h2>
-
+                <h2 class="font-title-md text-title-md text-on-surface font-bold">ডেলিভারি তথ্য</h2>
                 <div>
-                    <label class="block text-sm text-stone-700">জেলা</label>
+                    <label class="block font-body-sm text-body-sm text-on-surface-variant mb-1">জেলা</label>
                     <input name="district" value="{{ $district }}" required placeholder="ঢাকা"
-                        class="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm">
+                        class="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container">
                 </div>
-                <button type="submit" class="rounded-md border border-stone-300 px-4 py-2 text-sm hover:bg-stone-50">ডেলিভারি চার্জ হিসাব করুন</button>
+                <button type="submit" class="px-5 py-2.5 rounded-full bg-surface-container text-on-surface hover:bg-primary-container hover:text-on-primary-container transition-colors font-label-md text-label-md">ডেলিভারি চার্জ হিসাব করুন</button>
             </form>
         </div>
 
         @if ($error)
-            <p class="mt-4 rounded-md bg-red-50 px-4 py-2 text-sm text-red-700">{{ $error }}</p>
+            <p class="mt-4 rounded-xl bg-error-container px-4 py-3 font-body-sm text-body-sm text-on-error-container">{{ $error }}</p>
         @endif
 
         @if ($priced && $district)
-            <form action="{{ route('checkout.place') }}" method="POST" class="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-3">
+            <form action="{{ route('checkout.place') }}" method="POST" class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
                 @csrf
                 <input type="hidden" name="district" value="{{ $district }}">
                 <input type="hidden" name="expected_total" value="{{ $priced['grand_total'] }}">
 
-                <div class="sm:col-span-2 space-y-4 rounded-xl border border-stone-200 bg-white p-6">
-                    <h2 class="font-medium text-stone-900">ঠিকানা</h2>
-                    <div><label class="block text-sm text-stone-700">নাম</label>
-                        <input name="name" required class="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm"></div>
-                    <div><label class="block text-sm text-stone-700">ফোন</label>
-                        <input name="phone" value="{{ $customer->phone }}" required class="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm"></div>
-                    <div><label class="block text-sm text-stone-700">এলাকা</label>
-                        <input name="area" class="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm"></div>
-                    <div><label class="block text-sm text-stone-700">সম্পূর্ণ ঠিকানা</label>
-                        <textarea name="address_line" required class="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm"></textarea></div>
+                <div class="lg:col-span-2 space-y-4 rounded-2xl bg-surface-container-lowest p-6 shadow-sm">
+                    <h2 class="font-title-md text-title-md text-on-surface font-bold">ঠিকানা</h2>
+                    <div>
+                        <label class="block font-body-sm text-body-sm text-on-surface-variant mb-1">নাম</label>
+                        <input name="name" required class="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container">
+                    </div>
+                    <div>
+                        <label class="block font-body-sm text-body-sm text-on-surface-variant mb-1">ফোন</label>
+                        <input name="phone" value="{{ $customer->phone }}" required class="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container">
+                    </div>
+                    <div>
+                        <label class="block font-body-sm text-body-sm text-on-surface-variant mb-1">এলাকা</label>
+                        <input name="area" class="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container">
+                    </div>
+                    <div>
+                        <label class="block font-body-sm text-body-sm text-on-surface-variant mb-1">সম্পূর্ণ ঠিকানা</label>
+                        <textarea name="address_line" required class="w-full rounded-2xl border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container"></textarea>
+                    </div>
 
-                    <h2 class="pt-2 font-medium text-stone-900">পেমেন্ট</h2>
-                    <label class="flex items-center gap-2 text-sm">
+                    <h2 class="pt-2 font-title-md text-title-md text-on-surface font-bold">পেমেন্ট</h2>
+                    <label class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
                         <input type="radio" name="payment_method" value="cod" checked> ক্যাশ অন ডেলিভারি (COD)
                     </label>
                 </div>
 
-                <div class="space-y-2 rounded-xl border border-stone-200 bg-white p-6 text-sm">
-                    <h2 class="font-medium text-stone-900">অর্ডার সামারি</h2>
-                    <div class="flex justify-between"><span>সাবটোটাল</span><span>৳{{ number_format($priced['subtotal'] / 100, 0) }}</span></div>
-                    <div class="flex justify-between"><span>ডেলিভারি</span><span>৳{{ number_format($priced['delivery_fee'] / 100, 0) }}</span></div>
+                <div class="space-y-2 rounded-2xl bg-surface-container-low p-6 font-body-sm text-body-sm h-fit">
+                    <h2 class="font-title-md text-title-md text-on-surface font-bold mb-2">অর্ডার সামারি</h2>
+                    <div class="flex justify-between"><span class="text-on-surface-variant">সাবটোটাল</span><span class="text-on-surface">৳{{ number_format($priced['subtotal'] / 100, 0) }}</span></div>
+                    <div class="flex justify-between"><span class="text-on-surface-variant">ডেলিভারি</span><span class="text-on-surface">৳{{ number_format($priced['delivery_fee'] / 100, 0) }}</span></div>
                     @if ($priced['discount_total'] > 0)
-                        <div class="flex justify-between text-green-700"><span>ছাড়</span><span>-৳{{ number_format($priced['discount_total'] / 100, 0) }}</span></div>
+                        <div class="flex justify-between text-primary"><span>ছাড়</span><span>-৳{{ number_format($priced['discount_total'] / 100, 0) }}</span></div>
                     @endif
-                    <div class="flex justify-between border-t border-stone-100 pt-2 font-semibold"><span>মোট</span><span>৳{{ number_format($priced['grand_total'] / 100, 0) }}</span></div>
+                    <div class="flex justify-between border-t border-surface-container-high pt-2 font-title-md text-title-md font-bold text-on-surface"><span>মোট</span><span>৳{{ number_format($priced['grand_total'] / 100, 0) }}</span></div>
 
-                    <button type="submit" class="mt-3 w-full rounded-full bg-amber-700 py-2.5 font-medium text-white hover:bg-amber-800">অর্ডার কনফার্ম করুন</button>
+                    <button type="submit" class="mt-3 w-full py-3 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors font-label-md text-label-md">অর্ডার কনফার্ম করুন</button>
                 </div>
             </form>
         @endif

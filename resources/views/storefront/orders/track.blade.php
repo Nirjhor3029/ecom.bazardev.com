@@ -1,34 +1,36 @@
 @extends('storefront.layout')
 
-@section('title', 'অর্ডার ট্র্যাক করুন — Bazardev Ecom')
+@section('title', 'অর্ডার ট্র্যাক করুন — মধুবন')
 
 @section('content')
-<div class="mx-auto max-w-lg px-4 py-16 sm:px-6">
-    <h1 class="text-xl font-semibold text-stone-900">অর্ডার ট্র্যাক করুন</h1>
-    <p class="mt-1 text-sm text-stone-500">অর্ডার নম্বর ও ফোন নম্বর দিয়ে খুঁজুন।</p>
+<div class="max-w-lg mx-auto px-6 py-16">
+    <div class="mb-6 text-center">
+        <h1 class="font-headline-md text-headline-md text-on-surface font-bold">অর্ডার ট্র্যাক করুন</h1>
+        <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">অর্ডার নম্বর ও ফোন নম্বর দিয়ে খুঁজুন।</p>
+    </div>
 
-    <form method="GET" class="mt-6 space-y-3">
+    <form method="GET" class="space-y-3 rounded-2xl bg-surface-container-lowest p-6 shadow-sm">
         <input name="order_no" value="{{ request('order_no') }}" placeholder="ORD-2611-000123" required
-            class="w-full rounded-md border border-stone-300 px-3 py-2 text-sm">
+            class="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container">
         <input name="phone" value="{{ request('phone') }}" placeholder="01XXXXXXXXX" required
-            class="w-full rounded-md border border-stone-300 px-3 py-2 text-sm">
-        <button class="w-full rounded-full bg-amber-700 py-2.5 font-medium text-white hover:bg-amber-800">খুঁজুন</button>
+            class="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container">
+        <button class="w-full py-2.5 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors font-label-md text-label-md">খুঁজুন</button>
     </form>
 
     @if ($notFound)
-        <p class="mt-6 rounded-md bg-red-50 px-4 py-2 text-sm text-red-700">এই নম্বরে কোনো অর্ডার পাওয়া যায়নি।</p>
+        <p class="mt-6 rounded-xl bg-error-container px-4 py-3 font-body-sm text-body-sm text-on-error-container">এই নম্বরে কোনো অর্ডার পাওয়া যায়নি।</p>
     @endif
 
     @if ($order)
-        <div class="mt-8 rounded-xl border border-stone-200 bg-white p-6">
-            <p class="font-mono font-semibold text-amber-800">{{ $order->order_no }}</p>
-            <p class="mt-1 text-sm text-stone-600">বর্তমান অবস্থা: <strong>{{ $order->status }}</strong></p>
+        <div class="mt-6 rounded-2xl bg-surface-container-lowest p-6 shadow-sm">
+            <p class="font-title-md text-title-md text-primary font-bold">{{ $order->order_no }}</p>
+            <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">বর্তমান অবস্থা: <strong class="text-on-surface">{{ $order->status }}</strong></p>
 
-            <ul class="mt-4 space-y-2 border-l-2 border-amber-200 pl-4 text-sm">
+            <ul class="mt-4 space-y-2 border-l-2 border-primary-container pl-4 font-body-sm text-body-sm">
                 @foreach ($order->statusHistory as $h)
                     <li>
-                        <span class="font-medium text-stone-800">{{ $h->to }}</span>
-                        <span class="text-stone-400"> — {{ \Illuminate\Support\Carbon::parse($h->created_at)->format('d M, h:i A') }}</span>
+                        <span class="font-bold text-on-surface">{{ $h->to }}</span>
+                        <span class="text-on-surface-variant"> — {{ \Illuminate\Support\Carbon::parse($h->created_at)->format('d M, h:i A') }}</span>
                     </li>
                 @endforeach
             </ul>
