@@ -27,13 +27,25 @@ class ShippingRateResolver
             throw new ApiException('AREA_NOT_SERVICEABLE', 'This area is not currently serviceable.', 422);
         }
 
+        return $this->estimateForZone($zone, $subtotal);
+    }
+
+    /** Fee + ETA for an already-chosen zone (the cart page lets the customer pick an area before checkout). */
+    public function estimateForZone(ShippingZone $zone, int $subtotal): array
+    {
+        $zone->loadMissing('rates');
         $rate = $zone->rates->first();
+
+        if (! $rate) {
+            throw new ApiException('AREA_NOT_SERVICEABLE', 'This area is not currently serviceable.', 422);
+        }
 
         $fee = ($rate->free_over && $subtotal >= $rate->free_over) ? 0 : $rate->fee;
 
         return [
             'zone_id' => $zone->id,
             'fee' => $fee,
+            'free_over' => $rate->free_over,
             'est_days_min' => $rate->est_days_min,
             'est_days_max' => $rate->est_days_max,
         ];

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(RoleAndPermissionSeeder::class);
+        $this->call(GeoSeeder::class);
 
         if (! User::query()->where('email', 'admin@bazardev.com')->exists()) {
             $password = Str::password(20);

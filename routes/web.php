@@ -20,12 +20,16 @@ Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::post('/cart/items', [CartController::class, 'store'])->name('cart.items.store');
 Route::patch('/cart/items/{item}', [CartController::class, 'update'])->name('cart.items.update');
 Route::delete('/cart/items/{item}', [CartController::class, 'destroy'])->name('cart.items.destroy');
+Route::post('/cart/items/{item}/save-later', [CartController::class, 'saveForLater'])->name('cart.items.save-later');
+Route::delete('/cart', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('/cart/area', [CartController::class, 'area'])->name('cart.area');
 Route::post('/cart/coupon', [CartController::class, 'applyCoupon'])->name('cart.coupon.apply');
 Route::delete('/cart/coupon', [CartController::class, 'removeCoupon'])->name('cart.coupon.remove');
 
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
 Route::post('/checkout/otp/send', [CheckoutController::class, 'sendOtp'])
     ->middleware('throttle:otp-send')->name('checkout.otp.send');
+Route::get('/checkout/quote', [CheckoutController::class, 'quote'])->middleware('throttle:60,1')->name('checkout.quote');
 Route::get('/checkout/otp', [CheckoutController::class, 'showOtp'])->name('checkout.otp');
 Route::post('/checkout/otp/verify', [CheckoutController::class, 'verifyOtp'])
     ->middleware('throttle:customer-login')->name('checkout.otp.verify');

@@ -14,14 +14,20 @@
 
     @vite(['resources/css/app.css'])
 </head>
+{{-- Pages can `@section('minimal', '1')` for the distraction-free checkout chrome (no nav/search/bottom bar). --}}
+@php $minimal = View::hasSection('minimal'); @endphp
 <body class="flex min-h-full flex-col font-body-md text-on-surface bg-surface">
-    @include('storefront.partials.header')
+    @if ($minimal)
+        @include('storefront.partials.checkout-header')
+    @else
+        @include('storefront.partials.header')
+    @endif
 
-    <main class="flex-1 w-full pt-36 pb-28 lg:pb-0 bg-surface min-h-screen">
+    <main class="flex-1 w-full {{ $minimal ? 'pt-20' : 'pt-36 pb-28 lg:pb-0' }} bg-surface min-h-screen">
         @if (session('success'))
             <div class="mx-auto w-full max-w-7xl px-6 lg:px-12 pt-4"><div class="rounded-md bg-green-50 px-4 py-2 text-sm text-green-700">{{ session('success') }}</div></div>
         @endif
-        @if ($errors->any())
+        @if ($errors->any() && ! $minimal)
             <div class="mx-auto w-full max-w-7xl px-6 lg:px-12 pt-4">
                 <div class="rounded-md bg-red-50 px-4 py-2 text-sm text-red-700">
                     @foreach ($errors->all() as $error) <div>{{ $error }}</div> @endforeach
@@ -32,8 +38,12 @@
         @yield('content')
     </main>
 
-    @include('storefront.partials.footer')
-    @include('storefront.partials.search-suggest')
+    @if ($minimal)
+        @include('storefront.partials.checkout-footer')
+    @else
+        @include('storefront.partials.footer')
+        @include('storefront.partials.search-suggest')
+    @endif
 
     @yield('scripts')
 </body>

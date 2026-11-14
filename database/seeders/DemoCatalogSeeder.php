@@ -10,6 +10,7 @@ use App\Modules\Catalog\Models\Review;
 use App\Modules\Core\Models\Media;
 use App\Modules\Customers\Models\Customer;
 use App\Modules\Inventory\Models\InventoryItem;
+use App\Modules\Marketing\Models\Coupon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,6 +41,11 @@ class DemoCatalogSeeder extends Seeder
                 ['name' => ['bn' => $bn, 'en' => $en], 'sort' => $sort, 'is_active' => true, 'image_id' => $this->media($img, $bn)->id],
             );
         }
+
+        // Demo voucher for the cart page: 10% off, min order ৳1,000, capped at ৳500 (amounts in paisa).
+        Coupon::query()->updateOrCreate(['code' => 'HONEY10'], [
+            'type' => 'percent', 'value' => 10, 'min_cart' => 100000, 'max_discount' => 50000, 'is_active' => true,
+        ]);
 
         $video = $this->media('demo-video', 'মধুবন — মধু আহরণের ভিডিও', 'video/mp4', 'demo-video.mp4');
 

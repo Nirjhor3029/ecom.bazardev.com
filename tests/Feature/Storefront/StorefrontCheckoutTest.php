@@ -76,8 +76,15 @@ class StorefrontCheckoutTest extends TestCase
         $cart = $cartService->getOrCreate(null);
         $cartService->addItem($cart, $this->variant->id, 1);
 
-        // No `customer` session -> address/payment form must not render.
+        // No `customer` session -> the page asks for OTP verification first…
         $this->withCookie(\App\Modules\Cart\Support\StorefrontCart::COOKIE, $cart->token)
-            ->get('/checkout')->assertOk()->assertDontSee('অর্ডার কনফার্ম')->assertSee('OTP পাঠান');
+            ->get('/checkout')->assertOk()->assertSee('OTP পাঠান')->assertSee('ভেরিফিকেশন আবশ্যক');
+
+        // …and the server refuses to place an order for an unverified visitor, whatever the form says.
+        $this->post('/checkout/place', [
+            'district' => 'Dhaka', 'address_line' => 'House 1', 'name' => 'Guest',
+            'phone' => '01911112222', 'payment_method' => 'cod', 'expected_total' => 46000,
+        ])->assertRedirect(route('checkout.show'))->assertSessionHasErrors('phone');
+        $this->assertSame(0, Order::query()->count());
     }
 }
