@@ -33,6 +33,7 @@
     </main>
 
     @include('storefront.partials.footer')
+    @include('storefront.partials.search-suggest')
 
     @yield('scripts')
 </body>

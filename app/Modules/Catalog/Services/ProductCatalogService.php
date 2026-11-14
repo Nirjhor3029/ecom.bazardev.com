@@ -60,6 +60,8 @@ class ProductCatalogService
             $query->where(function (Builder $query) use ($q) {
                 $query->whereRaw("JSON_EXTRACT(name, '$.bn') LIKE ?", ["%{$q}%"])
                     ->orWhereRaw("JSON_EXTRACT(name, '$.en') LIKE ?", ["%{$q}%"])
+                    ->orWhereRaw("JSON_EXTRACT(short_desc, '$.bn') LIKE ?", ["%{$q}%"])
+                    ->orWhereHas('category', fn ($cq) => $cq->whereRaw("JSON_EXTRACT(name, '$.bn') LIKE ?", ["%{$q}%"]))
                     ->orWhereHas('variants', fn ($vq) => $vq->where('sku', 'like', "%{$q}%"));
             });
         }
@@ -80,18 +82,22 @@ class ProductCatalogService
             $query->whereRaw("JSON_EXTRACT(attributes, ?) = ?", ['$.'.$key, json_encode($value)]);
         }
 
-        $this->applySort($query, $request->string('sort', '-created_at')->toString());
+        $this->applySort($query, $request->string('sort', '-created_at')->toString(), $request->string('q')->toString());
 
         return $query;
     }
 
-    protected function applySort(Builder $query, string $sort): void
+    protected function applySort(Builder $query, string $sort, string $q = ''): void
     {
         match ($sort) {
             'price_asc' => $query->orderBy('min_price')->latest(),
             'price_desc' => $query->orderByDesc('min_price')->latest(),
             'rating' => $query->orderByDesc('reviews_avg')->orderByDesc('reviews_count')->latest(),
             'popular' => $query->orderByDesc('reviews_count')->latest(),
+            // Search relevance: name starts with the term, then name contains it, then the rest by popularity.
+            'relevance' => $query
+                ->orderByRaw("CASE WHEN JSON_UNQUOTE(JSON_EXTRACT(name, '$.bn')) LIKE ? THEN 0 WHEN JSON_UNQUOTE(JSON_EXTRACT(name, '$.bn')) LIKE ? THEN 1 ELSE 2 END", ["{$q}%", "%{$q}%"])
+                ->orderByDesc('reviews_count')->latest(),
             default => $query->latest(), // newest / -created_at
         };
     }

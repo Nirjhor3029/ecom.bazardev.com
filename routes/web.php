@@ -3,6 +3,7 @@
 use App\Modules\Cart\Http\Controllers\Web\CartController;
 use App\Modules\Catalog\Http\Controllers\Web\HomeController;
 use App\Modules\Catalog\Http\Controllers\Web\ProductController;
+use App\Modules\Catalog\Http\Controllers\Web\SearchController;
 use App\Modules\Checkout\Http\Controllers\Web\CheckoutController;
 use App\Modules\Customers\Http\Controllers\Web\WishlistController;
 use App\Modules\Orders\Http\Controllers\Web\OrderController;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::get('/search/suggest', [SearchController::class, 'suggest'])->middleware('throttle:60,1')->name('search.suggest');
 
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::post('/cart/items', [CartController::class, 'store'])->name('cart.items.store');

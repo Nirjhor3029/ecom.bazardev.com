@@ -14,9 +14,9 @@
 <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-container text-[24px]">hive</span></div>
 <div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight font-bold">মধুবন</span><span class="font-label-sm text-label-sm text-secondary tracking-wide">প্রাকৃতিক মধু ও বাদাম</span></div>
 </a>
-<form action="{{ route('products.index') }}" class="hidden md:flex flex-1 max-w-xl mx-4">
+<form action="{{ route('search') }}" class="hidden md:flex flex-1 max-w-xl mx-4">
 <div class="relative w-full flex items-center">
-<input type="text" name="q" value="{{ request('q') }}" class="w-full bg-surface-container-lowest rounded-full py-2.5 pl-5 pr-11 text-on-surface placeholder:text-on-surface-variant/70 text-body-sm font-body-sm shadow-[0_2px_12px_rgba(56,39,25,0.04)] focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="আপনি কী খুঁজছেন? (যেমন: সুন্দরবনের খলিশা মধু, কাজুবাদাম...)">
+<input type="text" name="q" data-suggest autocomplete="off" value="{{ request('q') }}" class="w-full bg-surface-container-lowest rounded-full py-2.5 pl-5 pr-11 text-on-surface placeholder:text-on-surface-variant/70 text-body-sm font-body-sm shadow-[0_2px_12px_rgba(56,39,25,0.04)] focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="আপনি কী খুঁজছেন? (যেমন: সুন্দরবনের খলিশা মধু, কাজুবাদাম...)">
 <button type="submit" class="absolute right-1.5 p-1.5 rounded-full bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[18px]">search</span></button>
 </div>
 </form>
@@ -71,10 +71,10 @@
 <a href="{{ route('orders.track') }}" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a>
 </div>
 </div>
-<form action="{{ route('products.index') }}" class="w-full">
+<form action="{{ route('search') }}" class="w-full">
 <div class="relative flex items-center">
 <span class="absolute left-3.5 material-symbols-outlined text-[18px] text-outline pointer-events-none">search</span>
-<input type="search" name="q" value="{{ request('q') }}" class="w-full h-10 pl-10 pr-4 bg-surface-container-lowest rounded-full font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-[0_2px_12px_rgba(56,39,25,0.04)]" placeholder="আপনি কী খুঁজছেন?...">
+<input type="search" name="q" data-suggest autocomplete="off" value="{{ request('q') }}" class="w-full h-10 pl-10 pr-4 bg-surface-container-lowest rounded-full font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-[0_2px_12px_rgba(56,39,25,0.04)]" placeholder="আপনি কী খুঁজছেন?...">
 </div>
 </form>
 </div>
