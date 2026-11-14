@@ -1,48 +1,49 @@
-@extends('admin.layout')
+@extends('admin.app')
 
 @section('title', 'Order')
 
+@section('header-actions')
+    <a href="/admin/orders" class="text-sm text-stone-500 hover:text-ink">&larr; Back to orders</a>
+@endsection
+
 @section('content')
-<div class="min-h-full">
-    @include('admin.partials.nav')
+<div class="flex items-center justify-between">
+    <h2 id="order-title" class="text-xl font-semibold text-ink">—</h2>
+    <div id="transition-buttons" class="flex gap-2"></div>
+</div>
 
-    <main class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-        <a href="/admin/orders" class="text-sm text-gray-500 hover:underline">&larr; Back to orders</a>
+<!-- Stage tracker: a real sequence (pending -> ... -> delivered), so a step
+     indicator is earning its place here rather than decorating. -->
+<div id="stepper" class="mt-6 hidden items-center rounded-lg border border-line bg-white px-6 py-5"></div>
+<div id="terminal-banner" class="mt-6 hidden rounded-lg px-4 py-3 text-sm font-medium"></div>
 
-        <div class="mt-2 flex items-center justify-between">
-            <h1 id="order-title" class="text-xl font-semibold text-gray-900">Order</h1>
-            <div id="transition-buttons" class="flex gap-2"></div>
+<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
+    <div class="space-y-6 sm:col-span-2">
+        <div class="rounded-lg border border-line bg-white p-5">
+            <h2 class="text-sm font-semibold text-ink">Items</h2>
+            <table class="mt-3 w-full text-sm">
+                <tbody id="items"></tbody>
+            </table>
+            <div id="totals" class="mt-3 border-t border-line pt-3 text-sm"></div>
         </div>
 
-        <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <div class="sm:col-span-2 space-y-6">
-                <div class="rounded-lg border border-gray-200 bg-white p-5">
-                    <h2 class="font-medium text-gray-900">Items</h2>
-                    <table class="mt-3 w-full text-sm">
-                        <tbody id="items"></tbody>
-                    </table>
-                    <div class="mt-3 border-t border-gray-100 pt-3 text-sm" id="totals"></div>
-                </div>
-
-                <div class="rounded-lg border border-gray-200 bg-white p-5">
-                    <h2 class="font-medium text-gray-900">Status history</h2>
-                    <ul id="history" class="mt-3 space-y-1 text-sm text-gray-600"></ul>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <div class="rounded-lg border border-gray-200 bg-white p-5">
-                    <h2 class="font-medium text-gray-900">Shipping address</h2>
-                    <div id="address" class="mt-2 text-sm text-gray-600"></div>
-                </div>
-
-                <div class="rounded-lg border border-gray-200 bg-white p-5">
-                    <h2 class="font-medium text-gray-900">Shipment</h2>
-                    <button id="book-shipment-btn" class="mt-2 w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-50">Book courier</button>
-                </div>
-            </div>
+        <div class="rounded-lg border border-line bg-white p-5">
+            <h2 class="text-sm font-semibold text-ink">Status history</h2>
+            <ul id="history" class="mt-3 space-y-1.5 text-sm text-stone-600"></ul>
         </div>
-    </main>
+    </div>
+
+    <div class="space-y-6">
+        <div class="rounded-lg border border-line bg-white p-5">
+            <h2 class="text-sm font-semibold text-ink">Shipping address</h2>
+            <div id="address" class="mt-2 text-sm text-stone-600"></div>
+        </div>
+
+        <div class="rounded-lg border border-line bg-white p-5">
+            <h2 class="text-sm font-semibold text-ink">Shipment</h2>
+            <button id="book-shipment-btn" class="btn-secondary mt-3 w-full">Book courier</button>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -51,7 +52,7 @@
     const orderId = @json($orderId);
 
     // Mirrors App\Modules\Orders\Services\OrderStateMachine — the backend
-    // is the real authority; this just decides which buttons to show.
+    // is the real authority; this just decides which buttons/steps to show.
     const TRANSITIONS = {
         pending: ['confirmed', 'on_hold', 'cancelled'],
         confirmed: ['processing', 'on_hold', 'cancelled'],
@@ -61,28 +62,65 @@
         shipped: ['delivered', 'returned'],
         delivered: ['returned'],
     };
+    const STAGES = ['pending', 'confirmed', 'processing', 'packed', 'shipped', 'delivered'];
+    const TERMINAL = {
+        cancelled: 'bg-status-rust-soft text-status-rust',
+        on_hold: 'bg-status-amber-soft text-status-amber',
+        returned: 'bg-status-rust-soft text-status-rust',
+    };
+
+    function renderStepper(status) {
+        const stepperEl = document.getElementById('stepper');
+        const bannerEl = document.getElementById('terminal-banner');
+
+        if (TERMINAL[status]) {
+            stepperEl.classList.add('hidden');
+            bannerEl.className = `mt-6 rounded-lg px-4 py-3 text-sm font-medium ${TERMINAL[status]}`;
+            bannerEl.textContent = status === 'on_hold' ? 'This order is on hold.' : `This order was ${status}.`;
+            return;
+        }
+
+        bannerEl.classList.add('hidden');
+        stepperEl.classList.remove('hidden');
+        stepperEl.classList.add('flex');
+
+        const currentIndex = STAGES.indexOf(status);
+        stepperEl.innerHTML = STAGES.map((stage, i) => {
+            const done = i <= currentIndex;
+            const circle = done
+                ? `<span class="flex h-6 w-6 items-center justify-center rounded-full bg-gold text-[11px] font-semibold text-white">${i + 1}</span>`
+                : `<span class="flex h-6 w-6 items-center justify-center rounded-full border border-line text-[11px] text-stone-400">${i + 1}</span>`;
+            const line = i < STAGES.length - 1
+                ? `<span class="mx-2 h-px flex-1 ${i < currentIndex ? 'bg-gold' : 'bg-line'}"></span>` : '';
+            return `<div class="flex flex-1 items-center">
+                        <div class="flex items-center gap-2">${circle}<span class="text-xs font-medium capitalize ${done ? 'text-ink' : 'text-stone-400'}">${stage}</span></div>
+                        ${line}
+                    </div>`;
+        }).join('');
+    }
 
     async function load() {
         const res = await AdminApi.call(`/orders/${orderId}`);
         const o = res.data;
 
-        document.getElementById('order-title').textContent = `Order ${o.order_no} — ${o.status}`;
+        document.getElementById('order-title').textContent = `Order ${o.order_no}`;
+        renderStepper(o.status);
 
         document.getElementById('items').innerHTML = o.items.map((i) => `
-            <tr class="border-b border-gray-50">
-                <td class="py-1">${i.name.bn ?? i.name}</td>
-                <td class="py-1 text-gray-500">${i.sku}</td>
-                <td class="py-1 text-right">×${i.qty}</td>
-                <td class="py-1 text-right">৳${(i.line_total / 100).toFixed(2)}</td>
+            <tr class="border-b border-stone-100 last:border-0">
+                <td class="py-1.5">${i.name.bn ?? i.name}</td>
+                <td class="py-1.5 text-stone-500">${i.sku}</td>
+                <td class="py-1.5 text-right tabular-nums">×${i.qty}</td>
+                <td class="py-1.5 text-right tabular-nums">৳${(i.line_total / 100).toFixed(2)}</td>
             </tr>
         `).join('');
 
         document.getElementById('totals').innerHTML = `
-            <div class="flex justify-between"><span>Subtotal</span><span>৳${(o.subtotal / 100).toFixed(2)}</span></div>
-            <div class="flex justify-between"><span>Delivery</span><span>৳${(o.delivery_fee / 100).toFixed(2)}</span></div>
-            <div class="flex justify-between"><span>Discount</span><span>-৳${(o.discount_total / 100).toFixed(2)}</span></div>
-            <div class="flex justify-between font-medium"><span>Grand total</span><span>৳${(o.grand_total / 100).toFixed(2)}</span></div>
-            <div class="flex justify-between text-gray-500"><span>Payment (${o.payment_method})</span><span>${o.payment_status}</span></div>
+            <div class="flex justify-between text-stone-600"><span>Subtotal</span><span class="tabular-nums">৳${(o.subtotal / 100).toFixed(2)}</span></div>
+            <div class="flex justify-between text-stone-600"><span>Delivery</span><span class="tabular-nums">৳${(o.delivery_fee / 100).toFixed(2)}</span></div>
+            <div class="flex justify-between text-stone-600"><span>Discount</span><span class="tabular-nums">-৳${(o.discount_total / 100).toFixed(2)}</span></div>
+            <div class="flex justify-between pt-1 font-semibold text-ink"><span>Grand total</span><span class="tabular-nums">৳${(o.grand_total / 100).toFixed(2)}</span></div>
+            <div class="flex justify-between pt-2 text-stone-500"><span>Payment (${o.payment_method})</span><span>${o.payment_status}</span></div>
         `;
 
         document.getElementById('address').innerHTML = `
@@ -91,11 +129,11 @@
         `;
 
         document.getElementById('history').innerHTML = o.status_history.map((h) => `
-            <li>${h.from ?? 'created'} → <strong>${h.to}</strong> <span class="text-gray-400">${new Date(h.created_at).toLocaleString()}</span></li>
+            <li>${h.from ?? 'created'} → <strong class="text-ink">${h.to}</strong> <span class="text-stone-400">${new Date(h.created_at).toLocaleString()}</span></li>
         `).join('');
 
         document.getElementById('transition-buttons').innerHTML = (TRANSITIONS[o.status] ?? []).map((to) =>
-            `<button data-to="${to}" class="transition-btn rounded-md border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-50">→ ${to}</button>`
+            `<button data-to="${to}" class="btn-secondary capitalize">${to}</button>`
         ).join('');
     }
 

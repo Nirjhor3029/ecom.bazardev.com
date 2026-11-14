@@ -5,5 +5,54 @@
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+        'Segoe UI Symbol', 'Noto Color Emoji', 'Noto Sans Bengali';
+
+    /* Admin palette — "beeswax & walnut": a honey-brand family resemblance to the
+       storefront's amber, desaturated and darkened for a daily-use operations tool.
+       Deliberately not the cream+terracotta or near-black+neon defaults. */
+    --color-walnut: #241a12;
+    --color-walnut-light: #342619;
+    --color-ink: #2b2118;
+    --color-paper: #fbf8f2;
+    --color-gold: #a8701f;
+    --color-gold-dark: #8a5a16;
+    --color-gold-soft: #f3e8d4;
+    --color-line: #e4d9c8;
+    --color-status-slate: #4c6475;
+    --color-status-slate-soft: #e7edf0;
+    --color-status-sage: #5c7a52;
+    --color-status-sage-soft: #e8efe4;
+    --color-status-rust: #9b4a3c;
+    --color-status-rust-soft: #f3e4e0;
+    --color-status-amber: #b5862b;
+    --color-status-amber-soft: #f6ead0;
+}
+
+@layer components {
+    .nav-link {
+        @apply flex items-center gap-2.5 rounded-md px-3 py-2 text-[13.5px] font-medium text-stone-300 transition-colors hover:bg-white/5 hover:text-white;
+    }
+    .nav-link-active {
+        @apply bg-gold/15 text-gold;
+    }
+    .nav-link-active svg {
+        @apply text-gold;
+    }
+
+    .btn-primary {
+        @apply rounded-md bg-gold px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gold-dark;
+    }
+    .btn-secondary {
+        @apply rounded-md border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-stone-50;
+    }
+    .field-input {
+        @apply block w-full rounded-md border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-stone-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/40;
+    }
+    .field-label {
+        @apply mb-1.5 block text-[13px] font-medium text-stone-600;
+    }
+
+    .status-pill {
+        @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-medium;
+    }
 }

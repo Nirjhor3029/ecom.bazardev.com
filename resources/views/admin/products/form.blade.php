@@ -1,83 +1,76 @@
-@extends('admin.layout')
+@extends('admin.app')
 
-@section('title', $productId ? 'Edit Product' : 'New Product')
+@section('title', $productId ? 'Edit product' : 'New product')
+
+@section('header-actions')
+    <a href="/admin/products" class="text-sm text-stone-500 hover:text-ink">&larr; Back to products</a>
+@endsection
 
 @section('content')
-<div class="min-h-full">
-    @include('admin.partials.nav')
-
-    <main class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between">
-            <h1 class="text-xl font-semibold text-gray-900">{{ $productId ? 'Edit Product' : 'New Product' }}</h1>
-            <a href="/admin/products" class="text-sm text-gray-500 hover:underline">&larr; Back to products</a>
+<form id="product-form" class="space-y-6 rounded-lg border border-line bg-white p-6">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+            <label class="field-label">Attribute set</label>
+            <select id="f-attribute-set" required class="field-input"></select>
         </div>
-
-        <form id="product-form" class="mt-6 space-y-6 rounded-lg border border-gray-200 bg-white p-6">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Attribute set</label>
-                    <select id="f-attribute-set" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm"></select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Category</label>
-                    <select id="f-category" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm">
-                        <option value="">— none —</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Name (বাংলা)</label>
-                    <input id="f-name-bn" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Name (English)</label>
-                    <input id="f-name-en" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Type</label>
-                    <select id="f-type" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm">
-                        <option value="simple">Simple (one variant)</option>
-                        <option value="variable">Variable (multiple options, e.g. weight)</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Status</label>
-                    <select id="f-status" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm">
-                        <option value="draft">Draft</option>
-                        <option value="active">Active (visible on storefront)</option>
-                        <option value="archived">Archived</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-sm font-medium text-gray-900">Attributes</h2>
-                <p class="text-xs text-gray-500">From the selected attribute set — required ones must be filled before the product can go Active.</p>
-                <div id="attribute-fields" class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
-            </div>
-
-            <p id="form-error" class="hidden rounded-md bg-red-50 px-3 py-2 text-sm text-red-700"></p>
-
-            <div class="flex gap-2 border-t border-gray-100 pt-4">
-                <button type="submit" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700">Save</button>
-            </div>
-        </form>
-
-        <!-- Variants -->
-        <div class="mt-8 rounded-lg border border-gray-200 bg-white p-6">
-            <div class="flex items-center justify-between">
-                <h2 class="font-medium text-gray-900">Variants</h2>
-                @if (!$productId)
-                    <p class="text-xs text-gray-500">Save the product first, then add variants.</p>
-                @endif
-            </div>
-
-            <div id="variant-rows" class="mt-4 space-y-3"></div>
-
-            @if ($productId)
-                <button id="add-variant-btn" type="button" class="mt-4 rounded-md border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-50">+ Add variant</button>
-            @endif
+        <div>
+            <label class="field-label">Category</label>
+            <select id="f-category" class="field-input">
+                <option value="">— none —</option>
+            </select>
         </div>
-    </main>
+        <div>
+            <label class="field-label">Name (বাংলা)</label>
+            <input id="f-name-bn" required class="field-input">
+        </div>
+        <div>
+            <label class="field-label">Name (English)</label>
+            <input id="f-name-en" class="field-input">
+        </div>
+        <div>
+            <label class="field-label">Type</label>
+            <select id="f-type" class="field-input">
+                <option value="simple">Simple (one variant)</option>
+                <option value="variable">Variable (multiple options, e.g. weight)</option>
+            </select>
+        </div>
+        <div>
+            <label class="field-label">Status</label>
+            <select id="f-status" class="field-input">
+                <option value="draft">Draft</option>
+                <option value="active">Active (visible on storefront)</option>
+                <option value="archived">Archived</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="border-t border-line pt-5">
+        <h2 class="text-sm font-semibold text-ink">Attributes</h2>
+        <p class="mt-0.5 text-sm text-stone-500">From the selected attribute set — required ones must be filled before the product can go Active.</p>
+        <div id="attribute-fields" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
+    </div>
+
+    <p id="form-error" class="hidden rounded-md bg-status-rust-soft px-3 py-2 text-sm text-status-rust"></p>
+
+    <div class="flex gap-2 border-t border-line pt-5">
+        <button type="submit" class="btn-primary">Save</button>
+    </div>
+</form>
+
+<!-- Variants -->
+<div class="mt-8 rounded-lg border border-line bg-white p-6">
+    <div class="flex items-center justify-between">
+        <h2 class="text-sm font-semibold text-ink">Variants</h2>
+        @if (!$productId)
+            <p class="text-sm text-stone-500">Save the product first, then add variants.</p>
+        @endif
+    </div>
+
+    <div id="variant-rows" class="mt-4 space-y-3"></div>
+
+    @if ($productId)
+        <button id="add-variant-btn" type="button" class="btn-secondary mt-4">+ Add variant</button>
+    @endif
 </div>
 @endsection
 
@@ -94,15 +87,15 @@
         const optKey = Object.keys(v.options || {})[0] || '';
         const optVal = v.options?.[optKey] || '';
         return `
-            <div class="variant-row grid grid-cols-7 gap-2 rounded-md border border-gray-100 p-3" data-id="${v.id ?? ''}">
-                <input placeholder="SKU" value="${v.sku ?? ''}" class="v-sku col-span-2 rounded border border-gray-300 px-2 py-1 text-sm">
-                <input placeholder="Option key (weight)" value="${optKey}" class="v-opt-key rounded border border-gray-300 px-2 py-1 text-sm">
-                <input placeholder="Value (500g)" value="${optVal}" class="v-opt-val rounded border border-gray-300 px-2 py-1 text-sm">
-                <input placeholder="Price (paisa)" type="number" value="${v.price ?? ''}" class="v-price rounded border border-gray-300 px-2 py-1 text-sm">
-                <input placeholder="Sale price" type="number" value="${v.sale_price ?? ''}" class="v-sale rounded border border-gray-300 px-2 py-1 text-sm">
+            <div class="variant-row grid grid-cols-7 gap-2 rounded-md border border-line p-3" data-id="${v.id ?? ''}">
+                <input placeholder="SKU" value="${v.sku ?? ''}" class="v-sku field-input col-span-2 py-1.5 text-sm">
+                <input placeholder="Option key (weight)" value="${optKey}" class="v-opt-key field-input py-1.5 text-sm">
+                <input placeholder="Value (500g)" value="${optVal}" class="v-opt-val field-input py-1.5 text-sm">
+                <input placeholder="Price (paisa)" type="number" value="${v.price ?? ''}" class="v-price field-input py-1.5 text-sm">
+                <input placeholder="Sale price" type="number" value="${v.sale_price ?? ''}" class="v-sale field-input py-1.5 text-sm">
                 <div class="flex items-center gap-2">
-                    <label class="flex items-center gap-1 text-xs text-gray-600"><input type="checkbox" class="v-default" ${v.is_default ? 'checked' : ''}> default</label>
-                    <button type="button" class="v-remove text-red-600 text-xs hover:underline">✕</button>
+                    <label class="flex items-center gap-1 text-xs text-stone-600"><input type="checkbox" class="v-default h-3.5 w-3.5 rounded border-line text-gold" ${v.is_default ? 'checked' : ''}> default</label>
+                    <button type="button" class="v-remove text-status-rust text-xs hover:underline">Remove</button>
                 </div>
             </div>
         `;
@@ -124,7 +117,7 @@
     function renderVariants(variants) {
         document.getElementById('variant-rows').innerHTML = variants.length
             ? variants.map(variantRowHtml).join('')
-            : '<p class="text-sm text-gray-400">No variants yet.</p>';
+            : '<p class="text-sm text-stone-400">No variants yet.</p>';
     }
 
     document.getElementById('variant-rows').addEventListener('click', async (e) => {
@@ -168,13 +161,13 @@
             const id = `attr-${a.code}`;
 
             if (a.type === 'boolean') {
-                return `<label class="flex items-center gap-2 text-sm text-gray-700"><input type="checkbox" id="${id}" data-code="${a.code}" class="attr-input" ${val ? 'checked' : ''}> ${label}${a.is_required ? ' *' : ''}</label>`;
+                return `<label class="flex items-center gap-2 text-sm text-stone-700"><input type="checkbox" id="${id}" data-code="${a.code}" class="attr-input h-4 w-4 rounded border-line text-gold" ${val ? 'checked' : ''}> ${label}${a.is_required ? ' *' : ''}</label>`;
             }
             if (a.type === 'select') {
                 const opts = (a.options || []).map((o) => `<option value="${o}" ${val === o ? 'selected' : ''}>${o}</option>`).join('');
-                return `<div><label class="block text-sm text-gray-700">${label}${a.is_required ? ' *' : ''}</label><select id="${id}" data-code="${a.code}" class="attr-input mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"><option value="">—</option>${opts}</select></div>`;
+                return `<div><label class="field-label">${label}${a.is_required ? ' *' : ''}</label><select id="${id}" data-code="${a.code}" class="attr-input field-input"><option value="">—</option>${opts}</select></div>`;
             }
-            return `<div><label class="block text-sm text-gray-700">${label}${a.is_required ? ' *' : ''}</label><input id="${id}" data-code="${a.code}" value="${val}" type="${a.type === 'number' ? 'number' : a.type === 'date' ? 'date' : 'text'}" class="attr-input mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"></div>`;
+            return `<div><label class="field-label">${label}${a.is_required ? ' *' : ''}</label><input id="${id}" data-code="${a.code}" value="${val}" type="${a.type === 'number' ? 'number' : a.type === 'date' ? 'date' : 'text'}" class="attr-input field-input"></div>`;
         }).join('');
     }
 

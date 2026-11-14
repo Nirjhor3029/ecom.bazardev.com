@@ -1,63 +1,58 @@
-@extends('admin.layout')
+@extends('admin.app')
 
 @section('title', 'Categories')
 
+@section('header-actions')
+    <button id="new-btn" class="btn-primary">+ New category</button>
+@endsection
+
 @section('content')
-<div class="min-h-full">
-    @include('admin.partials.nav')
+<!-- Create/edit form, hidden until "New category" or "Edit" is clicked -->
+<form id="category-form" class="mb-6 hidden space-y-4 rounded-lg border border-line bg-white p-5">
+    <input type="hidden" id="f-id">
+    <h2 id="form-title" class="text-sm font-semibold text-ink">New category</h2>
 
-    <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between">
-            <h1 class="text-xl font-semibold text-gray-900">Categories</h1>
-            <button id="new-btn" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700">+ New Category</button>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+            <label class="field-label">Name (বাংলা)</label>
+            <input id="f-name-bn" required class="field-input">
         </div>
+        <div>
+            <label class="field-label">Name (English)</label>
+            <input id="f-name-en" class="field-input">
+        </div>
+        <div>
+            <label class="field-label">Parent category</label>
+            <select id="f-parent" class="field-input">
+                <option value="">— none (top level) —</option>
+            </select>
+        </div>
+        <label class="flex items-center gap-2 pt-6 text-sm text-stone-700">
+            <input id="f-active" type="checkbox" checked class="h-4 w-4 rounded border-line text-gold focus:ring-gold/40">
+            Active (visible on storefront)
+        </label>
+    </div>
 
-        <!-- Create/edit form, hidden until "New Category" or "Edit" is clicked -->
-        <form id="category-form" class="mt-4 hidden space-y-4 rounded-lg border border-gray-200 bg-white p-5">
-            <input type="hidden" id="f-id">
-            <h2 id="form-title" class="font-medium text-gray-900">New Category</h2>
+    <p id="form-error" class="hidden rounded-md bg-status-rust-soft px-3 py-2 text-sm text-status-rust"></p>
 
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Name (বাংলা)</label>
-                    <input id="f-name-bn" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Name (English)</label>
-                    <input id="f-name-en" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Parent category</label>
-                    <select id="f-parent" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500">
-                        <option value="">— none (top level) —</option>
-                    </select>
-                </div>
-                <div class="flex items-center gap-2 pt-6">
-                    <input id="f-active" type="checkbox" checked class="h-4 w-4 rounded border-gray-300">
-                    <label for="f-active" class="text-sm text-gray-700">Active (visible on storefront)</label>
-                </div>
-            </div>
+    <div class="flex gap-2">
+        <button type="submit" class="btn-primary">Save</button>
+        <button type="button" id="cancel-btn" class="btn-secondary">Cancel</button>
+    </div>
+</form>
 
-            <p id="form-error" class="hidden rounded-md bg-red-50 px-3 py-2 text-sm text-red-700"></p>
-
-            <div class="flex gap-2">
-                <button type="submit" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700">Save</button>
-                <button type="button" id="cancel-btn" class="rounded-md border border-gray-300 px-4 py-2 text-sm hover:bg-gray-50">Cancel</button>
-            </div>
-        </form>
-
-        <table class="mt-6 w-full border-separate border-spacing-0 overflow-hidden rounded-lg border border-gray-200 bg-white text-sm">
-            <thead class="bg-gray-50 text-left text-gray-500">
-                <tr>
-                    <th class="px-4 py-2">Name</th>
-                    <th class="px-4 py-2">Slug</th>
-                    <th class="px-4 py-2">Active</th>
-                    <th class="px-4 py-2"></th>
-                </tr>
-            </thead>
-            <tbody id="rows"></tbody>
-        </table>
-    </main>
+<div class="overflow-hidden rounded-lg border border-line bg-white">
+    <table class="w-full text-sm">
+        <thead class="border-b border-line bg-stone-50/60 text-left text-stone-500">
+            <tr>
+                <th class="px-5 py-3 font-medium">Name</th>
+                <th class="px-5 py-3 font-medium">Slug</th>
+                <th class="px-5 py-3 font-medium">Active</th>
+                <th class="px-5 py-3"></th>
+            </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+    </table>
 </div>
 @endsection
 
@@ -74,21 +69,21 @@
             + categories.map((c) => `<option value="${c.id}">${c.name.bn}</option>`).join('');
 
         document.getElementById('rows').innerHTML = categories.map((c) => `
-            <tr class="border-t border-gray-100">
-                <td class="px-4 py-2">${c.name.bn}${c.name.en ? ` <span class="text-gray-400">(${c.name.en})</span>` : ''}</td>
-                <td class="px-4 py-2 text-gray-500">${c.slug}</td>
-                <td class="px-4 py-2">${c.is_active ? '✅' : '—'}</td>
-                <td class="px-4 py-2 text-right">
-                    <button data-edit="${c.id}" class="text-amber-700 hover:underline">Edit</button>
-                    <button data-delete="${c.id}" class="ml-3 text-red-600 hover:underline">Delete</button>
+            <tr class="border-b border-line last:border-0">
+                <td class="px-5 py-3">${c.name.bn}${c.name.en ? ` <span class="text-stone-400">(${c.name.en})</span>` : ''}</td>
+                <td class="px-5 py-3 text-stone-500">${c.slug}</td>
+                <td class="px-5 py-3">${c.is_active ? '<span class="status-pill bg-status-sage-soft text-status-sage">Active</span>' : '<span class="status-pill bg-stone-100 text-stone-500">Hidden</span>'}</td>
+                <td class="px-5 py-3 text-right">
+                    <button data-edit="${c.id}" class="text-gold hover:underline">Edit</button>
+                    <button data-delete="${c.id}" class="ml-3 text-status-rust hover:underline">Delete</button>
                 </td>
             </tr>
-        `).join('');
+        `).join('') || '<tr><td class="px-5 py-6 text-center text-stone-400" colspan="4">No categories yet.</td></tr>';
     }
 
     function showForm(category = null) {
         document.getElementById('category-form').classList.remove('hidden');
-        document.getElementById('form-title').textContent = category ? 'Edit Category' : 'New Category';
+        document.getElementById('form-title').textContent = category ? 'Edit category' : 'New category';
         document.getElementById('f-id').value = category?.id ?? '';
         document.getElementById('f-name-bn').value = category?.name?.bn ?? '';
         document.getElementById('f-name-en').value = category?.name?.en ?? '';
