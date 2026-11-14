@@ -68,6 +68,9 @@
     document.getElementById('q').addEventListener('input', () => { clearTimeout(window._t); window._t = setTimeout(load, 300); });
     document.getElementById('status').addEventListener('change', load);
 
+    // Dashboard links deep-link here with ?status=pending etc.
+    document.getElementById('status').value = new URLSearchParams(location.search).get('status') || '';
+
     load();
 </script>
 @endsection

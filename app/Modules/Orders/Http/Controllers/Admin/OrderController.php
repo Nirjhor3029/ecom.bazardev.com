@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
         $this->authorize('orders.order.view');
 
-        $query = Order::query()->latest();
+        $query = Order::query()->withCount('items')->withSum('items as qty_total', 'qty')->latest();
 
         if ($status = $request->string('filter.status')->toString()) {
             $query->where('status', $status);

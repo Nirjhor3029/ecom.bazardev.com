@@ -11,6 +11,7 @@ use App\Modules\Core\Http\Controllers\Admin\RoleController;
 use App\Modules\Core\Http\Controllers\Admin\UserController;
 use App\Modules\Customers\Http\Controllers\Admin\CustomerController;
 use App\Modules\Inventory\Http\Controllers\Admin\InventoryController;
+use App\Modules\Orders\Http\Controllers\Admin\DashboardController;
 use App\Modules\Orders\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,8 @@ Route::middleware('auth:sanctum')->name('admin.')->group(function () {
     Route::post('media', [MediaController::class, 'store']);
     Route::delete('media/{media}', [MediaController::class, 'destroy']);
 
+    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('dashboard/export', [DashboardController::class, 'export']);
     Route::get('orders', [OrderController::class, 'index']);
     Route::get('orders/{order}', [OrderController::class, 'show']);
     Route::post('orders/{order}/transition', [OrderController::class, 'transition']);

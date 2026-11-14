@@ -73,4 +73,10 @@ async function upload(path, formData, method = 'POST') {
     return data;
 }
 
-window.AdminApi = { call, upload, getToken, setToken, clearToken, isLoggedIn: () => !!getToken() };
+const api = { call, upload, getToken, setToken, clearToken, isLoggedIn: () => !!getToken() };
+
+// Module scripts are deferred, so inline page scripts can run before this file. The shim in
+// admin/app.blade.php queues those early calls and replays them once the real client is ready.
+window.__AdminApiReal = api;
+window.AdminApi = api;
+window.__adminApiReady?.();

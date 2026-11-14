@@ -32,6 +32,8 @@ class OrderResource extends JsonResource
             'status_history' => $this->whenLoaded('statusHistory', fn () => $this->statusHistory->map(fn ($h) => [
                 'from' => $h->from, 'to' => $h->to, 'note' => $h->note, 'created_at' => $h->created_at,
             ])),
+            'items_count' => $this->items_count ?? null,
+            'qty_total' => isset($this->qty_total) ? (int) $this->qty_total : null,
             'placed_at' => $this->placed_at,
         ];
     }

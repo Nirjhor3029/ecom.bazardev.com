@@ -4,6 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Admin') — Bazardev Ecom</title>
+    <script>
+        // AdminApi shim: resources/js/admin.js is a deferred module, but page scripts below call
+        // AdminApi.* inline. Early calls wait here until the real client has loaded.
+        (function () {
+            var ready = new Promise(function (resolve) { window.__adminApiReady = resolve; });
+            var wait = function (name) { return function () { var a = arguments; return ready.then(function () { return window.__AdminApiReal[name].apply(null, a); }); }; };
+            var KEY = 'ecom_admin_token';
+            window.AdminApi = {
+                call: wait('call'), upload: wait('upload'),
+                getToken: function () { return localStorage.getItem(KEY); },
+                setToken: function (t) { localStorage.setItem(KEY, t); },
+                clearToken: function () { localStorage.removeItem(KEY); },
+                isLoggedIn: function () { return !!localStorage.getItem(KEY); },
+            };
+        })();
+    </script>
     @vite(['resources/css/app.css', 'resources/js/admin.js'])
 </head>
 <body class="h-full bg-paper font-sans text-ink antialiased">
