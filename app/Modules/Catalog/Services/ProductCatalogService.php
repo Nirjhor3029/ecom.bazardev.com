@@ -5,7 +5,9 @@ namespace App\Modules\Catalog\Services;
 use App\Modules\Catalog\Models\Attribute;
 use App\Modules\Catalog\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
+use App\Modules\Catalog\Models\ProductVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 /**
  * SRC-1/SRC-2: keyword search + filter/sort for the public catalog.
@@ -17,11 +19,37 @@ class ProductCatalogService
     public function search(Request $request): Builder
     {
         $query = Product::query()
+            ->select('products.*')
             ->where('status', 'active')
             ->with(['variants.inventoryItem', 'media.media', 'attributeSet.attributeDefinitions']);
 
-        if ($categoryId = $request->integer('filter.category')) {
-            $query->where('category_id', $categoryId);
+        // filter[category]=1 or filter[category][]=1&filter[category][]=2 (storefront multi-select).
+        if ($categoryIds = array_filter(array_map('intval', Arr::wrap($request->input('filter.category'))))) {
+            $query->whereIn('category_id', $categoryIds);
+        }
+
+        // Aggregates used by sorting and by the shop cards (rating pill, "best seller").
+        $query->withCount('approvedReviews as reviews_count')->withAvg('approvedReviews as reviews_avg', 'rating');
+
+        // Cheapest sellable price per product, in paisa (sale price wins when set).
+        $query->addSelect(['min_price' => ProductVariant::query()
+            ->selectRaw('MIN(COALESCE(sale_price, price))')
+            ->whereColumn('product_id', 'products.id')->where('is_active', true)]);
+
+        if ($request->filled('price_min')) {
+            $query->having('min_price', '>=', $request->integer('price_min') * 100);
+        }
+
+        if ($request->filled('price_max')) {
+            $query->having('min_price', '<=', $request->integer('price_max') * 100);
+        }
+
+        if ($request->boolean('in_stock')) {
+            $query->whereHas('variants.inventoryItem', fn (Builder $q) => $q->whereRaw('on_hand - reserved > 0'));
+        }
+
+        if ($ratingMin = $request->integer('rating_min')) {
+            $query->having('reviews_avg', '>=', $ratingMin);
         }
 
         if ($brandId = $request->integer('filter.brand')) {
@@ -42,6 +70,13 @@ class ProductCatalogService
                 continue;
             }
 
+            // Variant-level attributes (e.g. weight) live on product_variants.options, not on the product.
+            if (Attribute::query()->where('code', $key)->where('is_variant', true)->exists()) {
+                $query->whereHas('variants', fn (Builder $q) => $q->where("options->{$key}", $value));
+
+                continue;
+            }
+
             $query->whereRaw("JSON_EXTRACT(attributes, ?) = ?", ['$.'.$key, json_encode($value)]);
         }
 
@@ -53,9 +88,11 @@ class ProductCatalogService
     protected function applySort(Builder $query, string $sort): void
     {
         match ($sort) {
-            'price_asc', 'price_desc' => null, // price lives on variants; handled client-side for now (TODO: denormalize min_price onto products for sortable queries)
-            'newest', '-created_at' => $query->latest(),
-            default => $query->latest(),
+            'price_asc' => $query->orderBy('min_price')->latest(),
+            'price_desc' => $query->orderByDesc('min_price')->latest(),
+            'rating' => $query->orderByDesc('reviews_avg')->orderByDesc('reviews_count')->latest(),
+            'popular' => $query->orderByDesc('reviews_count')->latest(),
+            default => $query->latest(), // newest / -created_at
         };
     }
 

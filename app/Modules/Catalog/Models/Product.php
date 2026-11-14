@@ -31,6 +31,12 @@ class Product extends Model
         ];
     }
 
+    /** Unordered, so it is safe inside withCount()/withAvg() sub-queries. */
+    public function approvedReviews(): HasMany
+    {
+        return $this->hasMany(Review::class)->where('status', 'approved');
+    }
+
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class)->where('status', 'approved')->latest();
