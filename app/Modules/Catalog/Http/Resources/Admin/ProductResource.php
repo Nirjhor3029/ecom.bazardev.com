@@ -24,6 +24,13 @@ class ProductResource extends JsonResource
             'tags' => $this->tags,
             'seo' => $this->seo,
             'variants' => VariantResource::collection($this->whenLoaded('variants')),
+            'media' => $this->whenLoaded('media', fn () => $this->media->map(fn ($m) => [
+                'id' => $m->id,
+                'media_id' => $m->media_id,
+                'url' => $m->media?->url(),
+                'is_primary' => $m->is_primary,
+                'sort' => $m->sort,
+            ])),
             'created_at' => $this->created_at,
         ];
     }

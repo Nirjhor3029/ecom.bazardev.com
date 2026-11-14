@@ -53,4 +53,24 @@ async function call(path, { method = 'GET', body = null } = {}) {
     return data;
 }
 
-window.AdminApi = { call, getToken, setToken, clearToken, isLoggedIn: () => !!getToken() };
+/** Multipart upload (file inputs can't go through call()'s JSON body). */
+async function upload(path, formData, method = 'POST') {
+    const res = await fetch(`/api/v1/admin${path}`, {
+        method,
+        headers: { Accept: 'application/json', Authorization: `Bearer ${getToken() ?? ''}` },
+        body: formData,
+    });
+
+    const data = res.status === 204 ? null : await res.json();
+
+    if (!res.ok) {
+        const err = new Error(data?.error?.message ?? 'Upload failed');
+        err.code = data?.error?.code;
+        err.details = data?.error?.details;
+        throw err;
+    }
+
+    return data;
+}
+
+window.AdminApi = { call, upload, getToken, setToken, clearToken, isLoggedIn: () => !!getToken() };

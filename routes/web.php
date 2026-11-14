@@ -53,4 +53,10 @@ Route::prefix('admin')->group(function () {
     Route::get('inventory', fn () => view('admin.inventory.index'));
 
     Route::get('settings', fn () => view('admin.settings.index'));
+
+    Route::get('media', fn () => view('admin.media.index'));
+
+    Route::get('profile', fn () => view('admin.profile'));
+    Route::get('users', fn () => view('admin.users.index'));
+    Route::get('roles', fn () => view('admin.roles.index'));
 });

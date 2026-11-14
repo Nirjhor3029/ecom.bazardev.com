@@ -14,6 +14,8 @@ class StaffUserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'avatar_url' => $this->avatarUrl(),
+            'is_active' => $this->is_active,
             'roles' => $this->getRoleNames(),
             'permissions' => $this->getAllPermissions()->pluck('name'),
             'last_login_at' => $this->last_login_at,

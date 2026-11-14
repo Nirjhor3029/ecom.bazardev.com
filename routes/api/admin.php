@@ -5,7 +5,10 @@ use App\Modules\Catalog\Http\Controllers\Admin\BrandController;
 use App\Modules\Catalog\Http\Controllers\Admin\CategoryController;
 use App\Modules\Catalog\Http\Controllers\Admin\ProductController;
 use App\Modules\Core\Http\Controllers\Admin\AuthController;
+use App\Modules\Core\Http\Controllers\Admin\MediaController;
 use App\Modules\Core\Http\Controllers\Admin\SettingsController;
+use App\Modules\Core\Http\Controllers\Admin\RoleController;
+use App\Modules\Core\Http\Controllers\Admin\UserController;
 use App\Modules\Customers\Http\Controllers\Admin\CustomerController;
 use App\Modules\Inventory\Http\Controllers\Admin\InventoryController;
 use App\Modules\Orders\Http\Controllers\Admin\OrderController;
@@ -17,6 +20,8 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('me', [AuthController::class, 'me']);
         Route::post('logout', [AuthController::class, 'logout']);
+        Route::patch('profile', [AuthController::class, 'updateProfile']);
+        Route::post('profile/avatar', [AuthController::class, 'uploadAvatar']);
     });
 });
 
@@ -31,6 +36,13 @@ Route::middleware('auth:sanctum')->name('admin.')->group(function () {
     Route::post('products/{product}/variants', [ProductController::class, 'storeVariant']);
     Route::patch('products/{product}/variants/{variant}', [ProductController::class, 'updateVariant']);
     Route::delete('products/{product}/variants/{variant}', [ProductController::class, 'destroyVariant']);
+    Route::post('products/{product}/media', [ProductController::class, 'storeMedia']);
+    Route::patch('products/{product}/media/{media}', [ProductController::class, 'updateMedia']);
+    Route::delete('products/{product}/media/{media}', [ProductController::class, 'destroyMedia']);
+
+    Route::get('media', [MediaController::class, 'index']);
+    Route::post('media', [MediaController::class, 'store']);
+    Route::delete('media/{media}', [MediaController::class, 'destroy']);
 
     Route::get('orders', [OrderController::class, 'index']);
     Route::get('orders/{order}', [OrderController::class, 'show']);
@@ -49,4 +61,14 @@ Route::middleware('auth:sanctum')->name('admin.')->group(function () {
     Route::get('settings', [SettingsController::class, 'index']);
     Route::patch('settings/{key}', [SettingsController::class, 'updateSetting']);
     Route::patch('features/{key}', [SettingsController::class, 'updateFeature']);
+
+    Route::get('users', [UserController::class, 'index']);
+    Route::post('users', [UserController::class, 'store']);
+    Route::patch('users/{user}', [UserController::class, 'update']);
+    Route::delete('users/{user}', [UserController::class, 'destroy']);
+
+    Route::get('roles', [RoleController::class, 'index']);
+    Route::post('roles', [RoleController::class, 'store']);
+    Route::patch('roles/{role}', [RoleController::class, 'update']);
+    Route::delete('roles/{role}', [RoleController::class, 'destroy']);
 });

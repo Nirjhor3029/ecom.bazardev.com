@@ -57,6 +57,23 @@
     </div>
 </form>
 
+<!-- Images -->
+<div class="mt-8 rounded-lg border border-line bg-white p-6">
+    <div class="flex items-center justify-between">
+        <h2 class="text-sm font-semibold text-ink">Images</h2>
+        @if ($productId)
+            <label class="btn-secondary cursor-pointer text-sm">
+                + Add image
+                <input id="image-input" type="file" accept="image/*" multiple class="hidden">
+            </label>
+        @else
+            <p class="text-sm text-stone-500">Save the product first, then add images.</p>
+        @endif
+    </div>
+
+    <div id="image-rows" class="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6"></div>
+</div>
+
 <!-- Variants -->
 <div class="mt-8 rounded-lg border border-line bg-white p-6">
     <div class="flex items-center justify-between">
@@ -213,7 +230,49 @@
         renderAttributeFields(set?.attributes ?? [], product.attributes ?? {});
 
         renderVariants(product.variants);
+        renderImages(product.media ?? []);
     }
+
+    function renderImages(media) {
+        document.getElementById('image-rows').innerHTML = media.map((m) => `
+            <div class="group relative aspect-square overflow-hidden rounded-md border ${m.is_primary ? 'border-gold ring-2 ring-gold/30' : 'border-line'}">
+                <img src="${m.url}" class="h-full w-full object-cover">
+                <div class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-1 bg-black/60 px-1.5 py-1 opacity-0 group-hover:opacity-100">
+                    ${m.is_primary ? '<span class="text-[10px] text-gold">Primary</span>' : `<button data-primary="${m.id}" class="text-[10px] text-white hover:underline">Set primary</button>`}
+                    <button data-remove="${m.id}" class="text-[10px] text-white hover:text-status-rust">Remove</button>
+                </div>
+            </div>
+        `).join('') || '<p class="col-span-full text-sm text-stone-400">No images yet.</p>';
+    }
+
+    document.getElementById('image-input')?.addEventListener('change', async (e) => {
+        for (const file of e.target.files) {
+            const formData = new FormData();
+            formData.append('file', file);
+            try {
+                await AdminApi.upload(`/products/${productId}/media`, formData);
+            } catch (err) {
+                alert(`${file.name}: ${err.message}`);
+            }
+        }
+        loadProduct();
+        e.target.value = '';
+    });
+
+    document.getElementById('image-rows').addEventListener('click', async (e) => {
+        const primaryId = e.target.dataset.primary;
+        const removeId = e.target.dataset.remove;
+
+        if (primaryId) {
+            await AdminApi.call(`/products/${productId}/media/${primaryId}`, { method: 'PATCH', body: { is_primary: true } });
+            loadProduct();
+        }
+        if (removeId) {
+            if (!confirm('Remove this image from the product?')) return;
+            await AdminApi.call(`/products/${productId}/media/${removeId}`, { method: 'DELETE' });
+            loadProduct();
+        }
+    });
 
     document.getElementById('product-form').addEventListener('submit', async (e) => {
         e.preventDefault();
