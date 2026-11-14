@@ -55,4 +55,12 @@
     .status-pill {
         @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-medium;
     }
+
+    .feature-toggle::after {
+        content: '';
+        @apply absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white transition-transform;
+    }
+    .feature-toggle:checked::after {
+        transform: translateX(16px);
+    }
 }

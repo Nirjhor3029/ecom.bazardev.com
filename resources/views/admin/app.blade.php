@@ -37,6 +37,10 @@
                             <svg class="h-[18px] w-[18px]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.8 6.2 10 2.5l7.2 3.7v7.6L10 17.5l-7.2-3.7V6.2Z"/><path d="M2.8 6.2 10 9.8l7.2-3.6M10 9.8v7.7"/></svg>
                             Products
                         </a>
+                        <a href="/admin/inventory" class="nav-link {{ request()->is('admin/inventory*') ? 'nav-link-active' : '' }}">
+                            <svg class="h-[18px] w-[18px]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6.5 10 3l7 3.5-7 3.5-7-3.5Z"/><path d="M3 6.5v7L10 17l7-3.5v-7"/><path d="M10 10v7"/></svg>
+                            Inventory
+                        </a>
                     </div>
                 </div>
 
@@ -46,6 +50,20 @@
                         <a href="/admin/orders" class="nav-link {{ request()->is('admin/orders*') ? 'nav-link-active' : '' }}">
                             <svg class="h-[18px] w-[18px]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4.5 2.5h11v15l-2-1.3-1.8 1.3-1.7-1.3-1.8 1.3-1.7-1.3-1.8 1.3v-15Z"/><path d="M7 7h6M7 10.3h6M7 13.6h3.5"/></svg>
                             Orders
+                        </a>
+                        <a href="/admin/customers" class="nav-link {{ request()->is('admin/customers*') ? 'nav-link-active' : '' }}">
+                            <svg class="h-[18px] w-[18px]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="6.5" r="3"/><path d="M3.5 17c0-3.5 3-5.5 6.5-5.5s6.5 2 6.5 5.5"/></svg>
+                            Customers
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="px-3 text-[11px] font-medium text-stone-500">Store</p>
+                    <div class="mt-1.5 space-y-0.5">
+                        <a href="/admin/settings" class="nav-link {{ request()->is('admin/settings*') ? 'nav-link-active' : '' }}">
+                            <svg class="h-[18px] w-[18px]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="2.6"/><path d="M10 2.8v2.3M10 14.9v2.3M17.2 10h-2.3M5.1 10H2.8M15.2 4.8l-1.6 1.6M6.4 13.6l-1.6 1.6M15.2 15.2l-1.6-1.6M6.4 6.4 4.8 4.8"/></svg>
+                            Settings
                         </a>
                     </div>
                 </div>

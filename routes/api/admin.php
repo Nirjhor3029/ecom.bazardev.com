@@ -5,6 +5,9 @@ use App\Modules\Catalog\Http\Controllers\Admin\BrandController;
 use App\Modules\Catalog\Http\Controllers\Admin\CategoryController;
 use App\Modules\Catalog\Http\Controllers\Admin\ProductController;
 use App\Modules\Core\Http\Controllers\Admin\AuthController;
+use App\Modules\Core\Http\Controllers\Admin\SettingsController;
+use App\Modules\Customers\Http\Controllers\Admin\CustomerController;
+use App\Modules\Inventory\Http\Controllers\Admin\InventoryController;
 use App\Modules\Orders\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +36,17 @@ Route::middleware('auth:sanctum')->name('admin.')->group(function () {
     Route::get('orders/{order}', [OrderController::class, 'show']);
     Route::post('orders/{order}/transition', [OrderController::class, 'transition']);
     Route::post('orders/{order}/shipments', [OrderController::class, 'bookShipment']);
+
+    Route::get('customers', [CustomerController::class, 'index']);
+    Route::get('customers/{customer}', [CustomerController::class, 'show']);
+    Route::post('customers/{customer}/block', [CustomerController::class, 'block']);
+    Route::post('customers/{customer}/unblock', [CustomerController::class, 'unblock']);
+
+    Route::get('inventory', [InventoryController::class, 'index']);
+    Route::post('inventory/{item}/adjust', [InventoryController::class, 'adjust']);
+    Route::get('inventory/{item}/movements', [InventoryController::class, 'movements']);
+
+    Route::get('settings', [SettingsController::class, 'index']);
+    Route::patch('settings/{key}', [SettingsController::class, 'updateSetting']);
+    Route::patch('features/{key}', [SettingsController::class, 'updateFeature']);
 });

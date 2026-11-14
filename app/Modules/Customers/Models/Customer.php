@@ -2,7 +2,7 @@
 
 namespace App\Modules\Customers\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\Orders\Models\Order;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,5 +28,10 @@ class Customer extends Authenticatable
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

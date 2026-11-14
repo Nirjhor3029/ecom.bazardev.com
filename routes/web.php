@@ -46,4 +46,11 @@ Route::prefix('admin')->group(function () {
 
     Route::get('orders', fn () => view('admin.orders.index'));
     Route::get('orders/{order}', fn ($order) => view('admin.orders.show', ['orderId' => (int) $order]));
+
+    Route::get('customers', fn () => view('admin.customers.index'));
+    Route::get('customers/{customer}', fn ($customer) => view('admin.customers.show', ['customerId' => (int) $customer]));
+
+    Route::get('inventory', fn () => view('admin.inventory.index'));
+
+    Route::get('settings', fn () => view('admin.settings.index'));
 });
