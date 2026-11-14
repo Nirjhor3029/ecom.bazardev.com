@@ -4,6 +4,7 @@ use App\Modules\Cart\Http\Controllers\Web\CartController;
 use App\Modules\Catalog\Http\Controllers\Web\HomeController;
 use App\Modules\Catalog\Http\Controllers\Web\ProductController;
 use App\Modules\Checkout\Http\Controllers\Web\CheckoutController;
+use App\Modules\Customers\Http\Controllers\Web\WishlistController;
 use App\Modules\Orders\Http\Controllers\Web\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,9 @@ Route::post('/checkout/otp/verify', [CheckoutController::class, 'verifyOtp'])
     ->middleware('throttle:customer-login')->name('checkout.otp.verify');
 Route::post('/checkout/place', [CheckoutController::class, 'place'])
     ->middleware('throttle:checkout')->name('checkout.place');
+
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::post('/wishlist/{product}/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
 Route::get('/orders/track', [OrderController::class, 'track'])->name('orders.track');
 Route::get('/orders/{orderNo}/success', [OrderController::class, 'success'])->name('orders.success');

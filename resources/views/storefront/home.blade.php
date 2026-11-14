@@ -2,12 +2,10 @@
 
 @section('title', 'মধুবন — Madhuban Artisanal Provisions')
 
-@section('bare-chrome', 'yes')
-
 @section('content')
 <!-- ================= DESKTOP (lg and up) — ported verbatim from home_code.html ================= -->
 <div class="hidden lg:block">
-<header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="bg-primary-container text-on-primary-container px-gutter py-1.5"><div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-1 text-center md:text-left"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">local_shipping</span><span class="font-label-sm text-label-sm">বিশুদ্ধ প্রাকৃতিক মধু ও বাদাম এখন আপনার হাতেই | সারা দেশে ৩-৫ দিনে ক্যাশ অন ডেলিভারি | ১০০০ টাকার অর্ডারে ফ্রি ডেলিভারি!</span></div><div class="flex items-center gap-4 font-label-sm text-label-sm"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px]">call</span><span>+880 1712-345678</span></div><div class="flex items-center gap-1 font-bold"><button class="hover:text-on-primary" type="button">বাং</button><span>|</span><button class="hover:text-on-primary" type="button">EN</button></div></div></div></div><div class="max-w-7xl mx-auto px-6 lg:px-12 py-3 flex items-center justify-between gap-4"><div class="flex items-center gap-3 shrink-0"><img alt="Madhuban Artisanal Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFIFNGzXweVjOqxHaPw7vl4mRqYapFexb7sTEax30b6KddO6J55BazqkZwtgLDTkmQEFTrk1YSc60_IRHqZUmc9KpdGBJCl2y-uKh1sPuQypVOcHyEJ09Mc362OEEMkF5VpdNL3y0EjdiCOikFdMQDA5BPL3Qr0W1RXvUNakkvmyukpng3n5U1bhFQpGi6Nt_VC35KHVWXv6LK3Wdh1h_SPqqd1pOMT1tXLI8F5AVv"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight font-bold">মধুবন</span><span class="font-label-sm text-label-sm text-secondary tracking-wide">প্রাকৃতিক মধু ও বাদাম</span></div></div><div class="hidden md:flex flex-1 max-w-xl mx-4"><div class="relative w-full flex items-center"><input class="w-full bg-surface-container-lowest rounded-full py-2.5 pl-5 pr-11 text-on-surface placeholder:text-on-surface-variant/70 text-body-sm font-body-sm shadow-[0_2px_12px_rgba(56,39,25,0.04)] focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="আপনি কী খুঁজছেন? (যেমন: সুন্দরবনের খলিশা মধু, কাজুবাদাম...)" type="text"/><button class="absolute right-1.5 p-1.5 rounded-full bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[18px]">search</span></button></div></div><div class="flex items-center gap-3 lg:gap-4 shrink-0"><button aria-label="Wishlist" class="relative p-2 text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-container-high transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[22px]">favorite</span><span class="absolute top-1 right-1 bg-primary text-on-primary text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span></button><div class="flex items-center gap-2"><button class="hidden sm:flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface px-2.5 py-1.5 rounded-full hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">account_circle</span><span class="font-label-md text-label-md">প্রবেশ / একাউন্ট</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div><button class="flex items-center gap-2 bg-primary-container text-on-primary-container px-3.5 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all shadow-[0_4px_16px_rgba(217,154,39,0.2)]" type="button"><span class="material-symbols-outlined text-[20px]">shopping_bag</span><span class="font-label-md text-label-md whitespace-nowrap">ঝুড়ি (৩) - ৳১,৭৮০</span></button></div></div><div class="bg-surface-container-low"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><nav class="flex items-center gap-1 py-1.5 overflow-x-auto" data-active-classes="bg-primary-container text-on-primary-container rounded-full font-bold"><a aria-current="page" class="px-3.5 py-1.5 whitespace-nowrap transition-colors bg-primary-container text-on-primary-container rounded-full font-bold" data-path="home" href="#">হোম</a><a class="px-3.5 py-1.5 font-label-md text-label-md whitespace-nowrap text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors" data-path="shop" href="#">সব পণ্য</a><a class="px-3.5 py-1.5 font-label-md text-label-md whitespace-nowrap text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors" data-path="honey-collection" href="#">মধু</a><a class="px-3.5 py-1.5 font-label-md text-label-md whitespace-nowrap text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors" data-path="nuts-and-seeds" href="#">বাদাম</a><a class="px-3.5 py-1.5 font-label-md text-label-md whitespace-nowrap text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors" data-path="gift-boxes" href="#">কম্বো ও গিফট বক্স</a><a class="px-3.5 py-1.5 font-label-md text-label-md whitespace-nowrap text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors" data-path="purity-and-lab" href="#">ল্যাব টেস্ট ও বিশুদ্ধতা</a><a class="px-3.5 py-1.5 font-label-md text-label-md whitespace-nowrap text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors" data-path="about-us" href="#">আমাদের গল্প</a><a class="px-3.5 py-1.5 font-label-md text-label-md whitespace-nowrap text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors" data-path="contact" href="#">যোগাযোগ</a></nav><div class="hidden lg:flex items-center gap-1.5 text-primary font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]">verified</span><span>১০০% খাঁটি ও প্রত্যয়িত</span></div></div></div></header><main class="w-full pt-36 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="flex flex-col w-full">
 <!-- 1. Hero Section -->
 <section class="relative w-full overflow-hidden bg-surface-container-low py-12 md:py-20 lg:py-24">
 <div class="max-w-7xl mx-auto px-6 lg:px-12">
@@ -126,54 +124,21 @@
 <p class="font-body-md text-body-md text-on-surface-variant">আপনার পছন্দের প্রাকৃতিক পণ্য খুঁজে নিন সরাসরি সংগৃহীত সেরা মান থেকে</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Category 1 -->
-<a class="group relative rounded-2xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col h-96" href="#honey">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Artisanal glass bottles of Sundarban, mustard, and litchi blossom raw honey glowing warmly under soft light with wild flora and wooden spoons nearby in warm golden tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7CIeX_lKoqkm9TUOwFj6UwZMA4IQ-co6znWZUmgT8F5CU-17pKTOFd73h8smp4cGFOE10RxbExhV7iS-0trdCVxKdOaUXSOE3y4eQg1y8bUhWOJtD9uCYd7ZkN0BlfMZNlaDigREzn8ReBuMJz8R26qyCCYBB20xAuk8XTj1c0cKdPkoQN-sLcCmIspSiPzbdh3irx-31qgbgZQ7BJgA9eSAvo3YEzW5CiiE-Vx1a"/>
+@foreach ($categories as $category)
+<a class="group relative rounded-2xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col h-96" href="{{ route('products.index', ['filter' => ['category' => $category->id]]) }}">
+@if ($image = $category->imageUrl())
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="{{ $category->name['bn'] ?? '' }}" src="{{ $image }}"/>
+@else
+<div class="w-full h-full flex items-center justify-center bg-surface-container text-6xl">🍯</div>
+@endif
 <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent flex flex-col justify-end p-6">
-<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm w-fit mb-2">প্রাকৃতিক মধু</span>
-<h3 class="font-headline-sm text-headline-sm text-surface mb-1">খাঁটি মধু</h3>
-<p class="font-body-sm text-body-sm text-surface/80 mb-3">সুন্দরবন, সরিষা ও লিচু ফুলের র ভ্যারাইটি</p>
+<h3 class="font-headline-sm text-headline-sm text-surface mb-1">{{ $category->name['bn'] ?? $category->name['en'] ?? '' }}</h3>
 <span class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary-fixed group-hover:translate-x-1 transition-transform">
-              অন্বেষণ করুন <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+অন্বেষণ করুন <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
 </span>
 </div>
 </a>
-<!-- Category 2 -->
-<a class="group relative rounded-2xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col h-96" href="#nuts">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Assorted premium roasted nuts including golden cashews, whole California almonds, walnuts, and green pistachios in handcrafted ceramic bowls against natural jute cloth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCROuSzNGYxKKqiUIfAIlQSs2Z3LrwrbmIQ9OMYpeuAKUKQ2ddEgS_y9tbywcOds2kgfaUjbdRXtMSWd5Rt9xCjAU1AZGBBOJ--wGrXeVy6ogJ74no8Z_Tedh0IHq9B8C-gbzoKMZAfT-J_9UIbxP0sF7KgveSxldVW7dapNvIypvZ57XQ2d01AIKI4KOVdO0_O2sqG0ZvNRBcB6v-3-nsjbvlWOhsGCicoN9jTsbVi"/>
-<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent flex flex-col justify-end p-6">
-<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm w-fit mb-2">পুষ্টিকর বাদাম</span>
-<h3 class="font-headline-sm text-headline-sm text-surface mb-1">প্রিমিয়াম বাদাম</h3>
-<p class="font-body-sm text-body-sm text-surface/80 mb-3">রোস্টেড কাজু, কাঠবাদাম, আখরোট ও পেস্তা</p>
-<span class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary-fixed group-hover:translate-x-1 transition-transform">
-              অন্বেষণ করুন <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-</span>
-</div>
-</a>
-<!-- Category 3 -->
-<a class="group relative rounded-2xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col h-96" href="#combos">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Nutritional combo package of honey jar alongside assorted nut mixes and dried fruit seed containers displayed on a warm stone kitchen table with morning ambient light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjo5RbySKaE1xAVMLUGPlnpDG1k39J8Ms1mxwxDeyrEtIAAe0za4x_C1J-hwnDogeVMqWzPmZKpYSGTRxY_3QZgWPCObfJ4-yWdA1LMfmQgXJnrWTTQ4mUg2WwO9jk7_hiOK8TmLyWE9OpqceOnujjdv13gWn_n-Bt9aThWet4Pi8_-iKThn2VZL1Vjd0JCrv0k4MLChfrwAfSPX7vY8pmoNAkR69L79S9yxBB7evZ"/>
-<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent flex flex-col justify-end p-6">
-<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm w-fit mb-2">স্বাস্থ্য প্যাক</span>
-<h3 class="font-headline-sm text-headline-sm text-surface mb-1">হানি কম্বো</h3>
-<p class="font-body-sm text-body-sm text-surface/80 mb-3">পারিবারিক সুস্থতায় বিশেষ সমন্বয় প্যাক</p>
-<span class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary-fixed group-hover:translate-x-1 transition-transform">
-              অন্বেষণ করুন <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-</span>
-</div>
-</a>
-<!-- Category 4 -->
-<a class="group relative rounded-2xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col h-96" href="#gifts">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Luxury engraved wooden gift box with satin ribbon featuring artisanal honey jars, a brass honey wand, and premium glass jars of dry fruits on an opulent warm table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTBGZGlLMHJAHevYsreKQdQlEjmuZrNsh9l7GeIu8F7l6nEI4HumwydNzBEgcl6impwnxSMS2NhYp7FTpq1jszvXoHdEVE0VtmIGwHld5MehJdqyae2aetKewNBDUgrke1PygCP2yKS9XxVhnLvZqZetya5AABNhakG-4uymcd98DzqTddUKQ-3gx87x9P47vnlU1tuuS-vCvKRdvg1NlQfowO1hsJZySXVkDuZy3B"/>
-<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent flex flex-col justify-end p-6">
-<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm w-fit mb-2">উপহারের সমাহার</span>
-<h3 class="font-headline-sm text-headline-sm text-surface mb-1">গিফট বক্স</h3>
-<p class="font-body-sm text-body-sm text-surface/80 mb-3">উৎসব ও করপোরেট উপহারের বিশেষ হ্যাম্পার</p>
-<span class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary-fixed group-hover:translate-x-1 transition-transform">
-              অন্বেষণ করুন <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-</span>
-</div>
-</a>
+@endforeach
 </div>
 </div>
 </section>
@@ -185,136 +150,53 @@
 <span class="font-label-sm text-label-sm text-primary uppercase tracking-wider block mb-2">সেরা পছন্দ</span>
 <h2 class="font-headline-lg text-headline-lg text-on-surface">জনপ্রিয় পণ্য</h2>
 </div>
-<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-on-surface transition-colors self-start md:self-auto" href="#shop-all">
+<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-on-surface transition-colors self-start md:self-auto" href="{{ route('products.index') }}">
 <span>সব পণ্য দেখুন</span>
 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 </a>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Product 1 -->
+@forelse ($products as $product)
 <div class="group rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between relative">
 <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-4">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Studio photograph of Sundarban Khalisha honey in an artisanal glass jar with cork finish, deep amber liquid with rich viscosity, isolated on soft warm cream background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5QNnTNE0Frg4a7_6alGZsMUWSX23joA7WHcc7cOnFelmTdzrotMEQBmmKNlM2c7cIZGy60MfeqtPxWt882q6k3n8sEMdbmXb6-Lk-iyilB1fYWGXUer4XVwS6xY93US3Xh_OUKahH5B2u66jOmuHO2a_fLyeE0glRfyVa71kIIrKmLfVuDyAP_VmM5FR_v39AFTaKJv0mYZc7YFgJRP8ndsTSRHps19IvFbK3i_qR"/>
-<div class="absolute top-2.5 left-2.5 flex flex-col gap-1.5">
-<span class="px-2.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm">বেস্ট সেলার</span>
-<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm">১২% ছাড়</span>
-</div>
-<button class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
+<a href="{{ route('products.show', $product->slug) }}" class="block w-full h-full">
+@if ($image = $product->primaryImageUrl())
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="{{ $product->name['bn'] ?? '' }}" src="{{ $image }}"/>
+@else
+<div class="w-full h-full flex items-center justify-center bg-surface-container text-5xl">🍯</div>
+@endif
+</a>
+<form action="{{ route('wishlist.toggle', $product) }}" method="POST" class="absolute top-2.5 right-2.5">
+@csrf
+<button type="submit" class="w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center transition-colors {{ in_array($product->id, $wishlistIds) ? 'text-error' : 'text-on-surface-variant hover:text-error' }}">
+<span class="material-symbols-outlined text-[18px]" style="{{ in_array($product->id, $wishlistIds) ? 'font-variation-settings: \'FILL\' 1;' : '' }}">favorite</span>
 </button>
+</form>
 </div>
+@php($range = $product->priceRange())
 <div class="flex flex-col flex-1">
-<div class="flex items-center gap-1.5 text-primary mb-1">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-label-sm text-label-sm font-bold text-on-surface">৪.৮</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">(১২৮ রিভিউ)</span>
-</div>
-<span class="font-label-sm text-label-sm text-secondary mb-1">৫০০ গ্রাম গ্লাস জার</span>
-<h3 class="font-title-md text-title-md text-on-surface mb-3 group-hover:text-primary transition-colors">সুন্দরবনের খলিশা মধু</h3>
+<span class="font-label-sm text-label-sm text-secondary mb-1">@if ($product->defaultVariant()?->weight_grams){{ $product->defaultVariant()->weight_grams }} গ্রাম @endif</span>
+<h3 class="font-title-md text-title-md text-on-surface mb-3 group-hover:text-primary transition-colors"><a href="{{ route('products.show', $product->slug) }}">{{ $product->name['bn'] ?? $product->name['en'] ?? '' }}</a></h3>
 <div class="mt-auto flex items-center justify-between pt-3">
 <div>
-<span class="font-body-sm text-body-sm text-on-surface-variant line-through block">৳৮৫০</span>
-<span class="font-title-lg text-title-lg text-on-surface font-bold">৳৭৫০</span>
+<span class="font-title-lg text-title-lg text-on-surface font-bold">৳{{ number_format($range['min'] / 100, 0) }}@if ($range['max'] > $range['min']) – ৳{{ number_format($range['max'] / 100, 0) }}@endif</span>
 </div>
-<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors flex items-center gap-1.5 font-label-md text-label-md">
+<form action="{{ route('cart.items.store') }}" method="POST">
+@csrf
+<input type="hidden" name="product_id" value="{{ $product->id }}">
+<input type="hidden" name="variant_id" value="{{ $product->defaultVariant()?->id }}">
+<input type="hidden" name="qty" value="1">
+<button type="submit" class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors flex items-center gap-1.5 font-label-md text-label-md" {{ ($product->defaultVariant()?->inventoryItem?->available() ?? 0) <= 0 ? 'disabled' : '' }}>
 <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
 <span>যুক্ত করুন</span>
 </button>
+</form>
 </div>
 </div>
 </div>
-<!-- Product 2 -->
-<div class="group rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between relative">
-<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-4">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Pure golden mustard blossom honey in an elegant glass packaging showing delicate crystallization texture, resting on rustic wood with dried yellow mustard flowers nearby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0m1NFXafiUWRRc7bfLKvqUS9HyyWjWdbm9to49mRX2GiwfRAE2dfD1_hpd8lwxLlc_IP2AIlfan3VxmHeBqtdpmjRtE9ZvRfu5ROe5K-OGxvSPAuiadHJx7uqktx3woYkdshKvzcpFsaG-5yGJLcVj5VJWAYWjPs4y2CFUsCCeIFfTN7E2vDiynEvHjitNyWktw9yWNHLwunhyjlumwjPfaMjW8_vaE3W8NFBCB2-"/>
-<div class="absolute top-2.5 left-2.5 flex flex-col gap-1.5">
-<span class="px-2.5 py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm">অর্গানিক সার্টিফাইড</span>
-<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm">১১% ছাড়</span>
-</div>
-<button class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-</div>
-<div class="flex flex-col flex-1">
-<div class="flex items-center gap-1.5 text-primary mb-1">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-label-sm text-label-sm font-bold text-on-surface">৪.৭</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">(৯৪ রিভিউ)</span>
-</div>
-<span class="font-label-sm text-label-sm text-secondary mb-1">৫০০ গ্রাম গ্লাস জার</span>
-<h3 class="font-title-md text-title-md text-on-surface mb-3 group-hover:text-primary transition-colors">সরিষা ফুলের প্রাকৃতিক মধু</h3>
-<div class="mt-auto flex items-center justify-between pt-3">
-<div>
-<span class="font-body-sm text-body-sm text-on-surface-variant line-through block">৳৬৫০</span>
-<span class="font-title-lg text-title-lg text-on-surface font-bold">৳৫৮০</span>
-</div>
-<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors flex items-center gap-1.5 font-label-md text-label-md">
-<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
-<span>যুক্ত করুন</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product 3 -->
-<div class="group rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between relative">
-<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-4">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Crispy oven-roasted whole cashew nuts grade W240 inside a premium minimalist kraft vacuum pouch with transparent window showing golden toasted nuts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJfK1oXC0yAEmrGm7XECS580nTStjX_EcKO4DSOwNVtNBGezSUf-UxPU1bFT3rAM111rP-AhjB8KQu8II6kD16vSP6ZbTY5cz0j84Z11PHTLf2qyC9KwklQoKALI8pElByH-ypm21m-4XHDKDCJigMSKH6pPIe_-5Orxp07JaZMOe07wMa38lEgkmSHPSGcJKnUyMsSHxRbaYfuKH0Axip0-KQzurYwPbUgYxCrNHh"/>
-<div class="absolute top-2.5 left-2.5 flex flex-col gap-1.5">
-<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm">W240 গ্রেড</span>
-</div>
-<button class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-</div>
-<div class="flex flex-col flex-1">
-<div class="flex items-center gap-1.5 text-primary mb-1">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-label-sm text-label-sm font-bold text-on-surface">৪.৯</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">(২০৪ রিভিউ)</span>
-</div>
-<span class="font-label-sm text-label-sm text-secondary mb-1">২৫০ গ্রাম ভ্যাকুয়াম ফয়েল পাউচ</span>
-<h3 class="font-title-md text-title-md text-on-surface mb-3 group-hover:text-primary transition-colors">প্রিমিয়াম রোস্টেড কাজুবাদাম</h3>
-<div class="mt-auto flex items-center justify-between pt-3">
-<div>
-<span class="font-title-lg text-title-lg text-on-surface font-bold">৳৪৫০</span>
-</div>
-<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors flex items-center gap-1.5 font-label-md text-label-md">
-<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
-<span>যুক্ত করুন</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product 4 -->
-<div class="group rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between relative">
-<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-4">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" alt="Top-grade California raw almonds neatly presented in an eco-friendly food container, uniform size and natural reddish-brown skin visible in warm studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnXqDHdqulVEOs3va3JY0QCqt6qCFlp1IHva7devltgnxib_oiOX-0Y0ZPxfQUTTlIuRox_K8jff_nER9N8LCn9aC6gt4Bhpa1sbFpT63oOJskoEpXYiYFzqvz7KkHTXxpadJ1td7mL6YBgKrDlCbbgu2p7BpEb5IxoYMr1GLNMmZj4jea0c6qePGySicd6w70iZ-VdUa6Zn7aZlN5YSO_T2PZIDfJp2Y6YU1nIr7V"/>
-<div class="absolute top-2.5 left-2.5 flex flex-col gap-1.5">
-<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm">আমদানি করা ফ্রেশ</span>
-</div>
-<button class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-</div>
-<div class="flex flex-col flex-1">
-<div class="flex items-center gap-1.5 text-primary mb-1">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-label-sm text-label-sm font-bold text-on-surface">৪.৮</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">(১৫৬ রিভিউ)</span>
-</div>
-<span class="font-label-sm text-label-sm text-secondary mb-1">২৫০ গ্রাম ভ্যাকুয়াম প্যাক</span>
-<h3 class="font-title-md text-title-md text-on-surface mb-3 group-hover:text-primary transition-colors">ক্যালিফোর্নিয়া প্রিমিয়াম কাঠবাদাম</h3>
-<div class="mt-auto flex items-center justify-between pt-3">
-<div>
-<span class="font-title-lg text-title-lg text-on-surface font-bold">৳৩৮০</span>
-</div>
-<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-on-surface hover:text-surface transition-colors flex items-center gap-1.5 font-label-md text-label-md">
-<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
-<span>যুক্ত করুন</span>
-</button>
-</div>
-</div>
-</div>
+@empty
+<p class="col-span-full text-center font-body-md text-body-md text-on-surface-variant py-12">এখনো কোনো পণ্য যুক্ত করা হয়নি।</p>
+@endforelse
 </div>
 </div>
 </section>
@@ -714,11 +596,11 @@
       button.classList.remove('text-on-surface-variant');
     });
   });
-</script></main><footer class="w-full bg-surface-container-low pt-16 pb-8 shadow-[0_-1px_12px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"><div><div class="flex items-center gap-3 mb-4"><img alt="Madhuban Artisanal Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFIFNGzXweVjOqxHaPw7vl4mRqYapFexb7sTEax30b6KddO6J55BazqkZwtgLDTkmQEFTrk1YSc60_IRHqZUmc9KpdGBJCl2y-uKh1sPuQypVOcHyEJ09Mc362OEEMkF5VpdNL3y0EjdiCOikFdMQDA5BPL3Qr0W1RXvUNakkvmyukpng3n5U1bhFQpGi6Nt_VC35KHVWXv6LK3Wdh1h_SPqqd1pOMT1tXLI8F5AVv"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight font-bold">মধুবন</span><span class="font-label-sm text-label-sm text-secondary">প্রাকৃতিক মধু ও বাদাম</span></div></div><p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">মধুবন বাংলাদেশের প্রত্যন্ত অঞ্চল ও সুন্দরবনের মৌয়ালদের থেকে সরাসরি সংগৃহীত খাঁটি মধু ও প্রিমিয়াম গ্রেডের কাজু, কাঠবাদাম ও আখরোট সরবরাহ করে।</p><div class="flex items-center gap-2"><a aria-label="Facebook" class="w-9 h-9 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">public</span></a><a aria-label="Instagram" class="w-9 h-9 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">photo_camera</span></a><a aria-label="YouTube" class="w-9 h-9 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">play_circle</span></a><a aria-label="WhatsApp" class="w-9 h-9 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">chat</span></a></div></div><div><h3 class="font-title-md text-title-md text-on-surface mb-4 font-bold">প্রয়োজনীয় লিংক</h3><ul class="space-y-2.5 font-body-sm text-body-sm"><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">হোম</a></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">সব পণ্য</a></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">আমাদের গল্প</a></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">যোগাযোগ</a></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">ব্লগ ও পুষ্টি বার্তা</a></li></ul></div><div><h3 class="font-title-md text-title-md text-on-surface mb-4 font-bold">কাস্টমার সাপোর্ট</h3><ul class="space-y-2.5 font-body-sm text-body-sm"><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">সচরাচর জিজ্ঞাসা (FAQ)</a></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">ডেলিভারি ও চার্জ</a></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">রিটার্ন ও রিফান্ড পলিসি</a></li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[14px]">arrow_forward_ios</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">টার্মস ও প্রাইভেসি পলিসি</a></li></ul></div><div><h3 class="font-title-md text-title-md text-on-surface mb-4 font-bold">যোগাযোগ ও ঠিকানা</h3><ul class="space-y-3 font-body-sm text-body-sm text-on-surface-variant"><li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">call</span><div><span class="block font-bold text-on-surface">হটলাইন:</span><span>+880 1712-345678</span></div></li><li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">mail</span><div><span class="block font-bold text-on-surface">ইমেইল:</span><span>support@madhuban.com.bd</span></div></li><li class="flex items-start gap-2.5"><span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">location_on</span><div><span class="block font-bold text-on-surface">ঠিকানা:</span><span>বাড়ি #২৪, রোড #১০, বনানী, ঢাকা-১২১৩, বাংলাদেশ</span></div></li></ul></div></div><div class="max-w-7xl mx-auto px-6 lg:px-12 pt-6 border-t border-outline-variant/30 flex flex-col md:flex-row items-center justify-between gap-4"><p class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left">Copyright © 2025 মধুবন (Madhuban Artisan Provisions). সর্বস্বত্ব সংরক্ষিত.</p><div class="flex flex-wrap items-center justify-center gap-2 font-label-sm text-label-sm text-on-surface-variant"><span class="px-2 py-1 bg-surface-container rounded">SSLCommerz</span><span class="px-2 py-1 bg-surface-container rounded font-bold text-error">bKash</span><span class="px-2 py-1 bg-surface-container rounded font-bold text-primary">Nagad</span><span class="px-2 py-1 bg-surface-container rounded">Rocket</span><span class="px-2 py-1 bg-surface-container rounded font-bold">VISA</span><span class="px-2 py-1 bg-surface-container rounded font-bold">Mastercard</span></div></div></footer></div>
+</script></div>
 
 <!-- ================= MOBILE (below lg) — ported verbatim from home_mobile_code.html ================= -->
 <div class="lg:hidden">
-<header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="bg-primary text-on-primary text-center py-1 px-4 text-label-sm font-label-sm tracking-wider flex items-center justify-center gap-1.5"><span class="material-symbols-outlined text-[14px]">local_shipping</span><span>বিশুদ্ধ মধু ও বাদাম | ১০০০ টাকার অর্ডারে ফ্রি ডেলিভারি</span></div><div class="h-28 px-margin-mobile flex flex-col justify-center gap-2"><div class="flex items-center justify-between gap-2"><button aria-label="Menu" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-variant/40 transition-colors"><span class="material-symbols-outlined text-[24px]">menu</span></button><div class="flex items-center gap-2"><img alt="Madhuban Artisanal Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFIFNGzXweVjOqxHaPw7vl4mRqYapFexb7sTEax30b6KddO6J55BazqkZwtgLDTkmQEFTrk1YSc60_IRHqZUmc9KpdGBJCl2y-uKh1sPuQypVOcHyEJ09Mc362OEEMkF5VpdNL3y0EjdiCOikFdMQDA5BPL3Qr0W1RXvUNakkvmyukpng3n5U1bhFQpGi6Nt_VC35KHVWXv6LK3Wdh1h_SPqqd1pOMT1tXLI8F5AVv"/><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">মধুবন</span><span class="hidden">Home</span></div><div class="flex items-center gap-1"><button aria-label="উইশলিস্ট" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">favorite</span></button><button aria-label="কার্ট" class="relative w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-1.5 right-1.5 min-w-[18px] h-[18px] bg-primary-container text-on-primary text-[10px] font-bold rounded-full flex items-center justify-center px-1 shadow-sm">৩</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="w-full"><div class="relative flex items-center"><span class="absolute left-3.5 material-symbols-outlined text-[18px] text-outline pointer-events-none">search</span><input class="w-full h-10 pl-10 pr-4 bg-surface-container-lowest rounded-full font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-[0_2px_12px_rgba(56,39,25,0.04)]" placeholder="আপনি কী খুঁজছেন?..." type="search"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-36 pb-28 bg-surface"><div class="flex flex-col w-full">
+<div class="flex flex-col w-full">
 <!-- 1. Mobile Hero -->
 <section class="px-margin-mobile pt-space-xs pb-space-lg flex flex-col gap-4">
 <!-- Golden Origin Pill -->
@@ -829,52 +711,25 @@
 <span class="font-label-sm text-[11px] text-primary uppercase font-bold tracking-wider">সংগ্রহশালা</span>
 <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">আমাদের পণ্যসমূহ</h2>
 </div>
-<a class="font-label-md text-label-md text-primary flex items-center gap-0.5 hover:underline" href="#">
+<a class="font-label-md text-label-md text-primary flex items-center gap-0.5 hover:underline" href="{{ route('products.index') }}">
 <span>সব দেখুন</span>
 <span class="material-symbols-outlined text-[16px]">chevron_right</span>
 </a>
 </div>
 <div class="grid grid-cols-2 gap-3">
-<!-- Cat 1 -->
-<a class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-surface-container-low flex items-end p-3 shadow-sm" href="#">
-<img class="absolute inset-0 w-full h-full object-cover group-active:scale-105 transition-transform duration-300" alt="Artisanal raw honey jar with golden nectar dripping over natural rustic honeycomb background warm sunlit photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVx5egOXwB_GJHfJJzcSV26z76pGR1D-mhox4-flwBQnXnBcOrTowNsMQ6O1Pf_wwg2eI5sAX9kaV9LyhFQl2TYYgk9j04mNTrIUXX4C0TUytcnXsg83ZJOMLFxg0oe-1YRWoGLUjJvd-jaIJqdzpZ_n1VqGIWlPMl-W6oQTls2OySQXRjhlZb6kOfdIIUZyhPSJ4WD4LUDWiTDq2DeH8B2QHnIRP3X79-YacRThhx"/>
+@foreach ($categories as $category)
+<a class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-surface-container-low flex items-end p-3 shadow-sm" href="{{ route('products.index', ['filter' => ['category' => $category->id]]) }}">
+@if ($image = $category->imageUrl())
+<img class="absolute inset-0 w-full h-full object-cover group-active:scale-105 transition-transform duration-300" alt="{{ $category->name['bn'] ?? '' }}" src="{{ $image }}"/>
+@else
+<div class="absolute inset-0 w-full h-full flex items-center justify-center bg-surface-container text-5xl">🍯</div>
+@endif
 <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent"></div>
 <div class="relative z-10 w-full">
-<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-bold uppercase inline-block mb-1">১২+ আইটেম</span>
-<p class="font-headline-sm text-[16px] leading-tight text-surface-container-lowest font-bold">খাঁটি মধু</p>
-<p class="font-body-sm text-[11px] text-surface-variant">বন ও ফুলের প্রাকৃতিক রস</p>
+<p class="font-headline-sm text-[16px] leading-tight text-surface-container-lowest font-bold">{{ $category->name['bn'] ?? $category->name['en'] ?? '' }}</p>
 </div>
 </a>
-<!-- Cat 2 -->
-<a class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-surface-container-low flex items-end p-3 shadow-sm" href="#">
-<img class="absolute inset-0 w-full h-full object-cover group-active:scale-105 transition-transform duration-300" alt="Top view of premium roasted almonds, walnuts, and cashews served in a handcrafted clay bowl with warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFpuPnPFmXFIArwlLKs47AmrOGVnGq-0DU0lg7XHIhIECrK2GtcWdzJD6ZP7_DcnczRvEQOPY0FF-muXiWf4lCfsYIjX_efXb-1b69N2OzEEs_6hNDThfOaCYrWDuwNLIE4yzCHrhbkdsQYlavIdI5obKes1gHEEQGYRLWC_RYJgt6C1biPXEloszpQv4KaU7OtThH6_WxK6FF48kLxQXS9ygxBS3Qm1Z5qelkpqzi"/>
-<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent"></div>
-<div class="relative z-10 w-full">
-<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-bold uppercase inline-block mb-1">৮+ আইটেম</span>
-<p class="font-headline-sm text-[16px] leading-tight text-surface-container-lowest font-bold">প্রিমিয়াম বাদাম</p>
-<p class="font-body-sm text-[11px] text-surface-variant">মুচমুচে ও পুষ্টিকর</p>
-</div>
-</a>
-<!-- Cat 3 -->
-<a class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-surface-container-low flex items-end p-3 shadow-sm" href="#">
-<img class="absolute inset-0 w-full h-full object-cover group-active:scale-105 transition-transform duration-300" alt="Golden honey jar paired with roasted nuts and organic ghee in an authentic artisanal gift presentation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACCzRHQxfSvzUEdqAiHzhwWoFj9iZhZDQx-BK3PCu2Y3HKRyzkomk2I5dwf6PHNBoYw_LdUnhexFRjBicYAA6rNDmHXbByJ8UYwGpEf5XwtCFtvc4rwme5g0S2bp02OMMUJ4crIXEBEzNI_gT_SK9mRLAJ7eyYbsjqF5If6ZioK8BhuJLayx7g02dohrMZtu9cqh00Ve_aH4ePmzGkMXlEID2rzBYiPjNDS4iQmmn0"/>
-<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent"></div>
-<div class="relative z-10 w-full">
-<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold uppercase inline-block mb-1">সাশ্রয়ী অফার</span>
-<p class="font-headline-sm text-[16px] leading-tight text-surface-container-lowest font-bold">হানি কম্বো</p>
-<p class="font-body-sm text-[11px] text-surface-variant">মধু ও বাদামের মেলবন্ধন</p>
-</div>
-</a>
-<!-- Cat 4 -->
-<a class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-surface-container-low flex items-end p-3 shadow-sm" href="#">
-<img class="absolute inset-0 w-full h-full object-cover group-active:scale-105 transition-transform duration-300" alt="Elegant luxury wooden hamper packed with assorted dry fruits and artisanal glass honey jars with gold accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmzSNqnM9Y95TNK8KME6kuBHN9rk9x1E_dbrfV5y0rIaU3vkMdOclfN5vphwu4O79ndWnwbb5ji_ihWIWu5pIBM93WR3zkOVXHPGIzmcsQlDWEDOppLVgRZeUuu59Kq-suYr4G2j01tPWgwjDgz8ZP8RItUo6VqHTsp6dRTXPg1ggyt5h7iCQYtp9CBimjQIvckMrKydr0F8UpVLkKyj4RuChVTm0W2twoA68mgIO3"/>
-<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent"></div>
-<div class="relative z-10 w-full">
-<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold uppercase inline-block mb-1">উৎসব স্পেশাল</span>
-<p class="font-headline-sm text-[16px] leading-tight text-surface-container-lowest font-bold">গিফট বক্স</p>
-<p class="font-body-sm text-[11px] text-surface-variant">অভিজাত উপহার প্যাক</p>
-</div>
-</a>
+@endforeach
 </div>
 </section>
 <!-- 4. Featured Products (2-column mobile grid) -->
@@ -889,126 +744,49 @@
 </div>
 </div>
 <div class="grid grid-cols-2 gap-3">
-<!-- Product Card 1 -->
+@forelse ($products as $product)
+@php($range = $product->priceRange())
 <div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col justify-between shadow-[0_4px_16px_rgba(56,39,25,0.04)]">
 <div class="relative aspect-square bg-surface-container-low overflow-hidden">
-<img class="w-full h-full object-cover" alt="Glass jar of Sundarban Khalisha flower raw wild honey with golden hues placed on clean rustic neutral studio backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUsGJJfxzhztI21HAi7SWysovunQ65Zg0YNqJ_eE08aJ3iTBBfSqpCSkmosbGXC1rvrC0tkI-Q_SPVjybq4qWWKJ2Oo9jJuKE6CqhR36y5q9ZVAbYS5CkT_fMeeRf77zKTkY8pUv69pZDjxLeyg11oGxHvexD1KBXkYxKW_UhySczDGeix_CKTn4NrH14OIlLfsh2wceLdhpfuFiX61w9EQJC8HWBuaIqzN3gbqIJG"/>
-<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold shadow-sm">-১২%</span>
-<button aria-label="উইশলিস্টে যোগ করুন" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant active:text-error transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
+<a href="{{ route('products.show', $product->slug) }}" class="block w-full h-full">
+@if ($image = $product->primaryImageUrl())
+<img class="w-full h-full object-cover" alt="{{ $product->name['bn'] ?? '' }}" src="{{ $image }}"/>
+@else
+<div class="w-full h-full flex items-center justify-center bg-surface-container text-4xl">🍯</div>
+@endif
+</a>
+<form action="{{ route('wishlist.toggle', $product) }}" method="POST" class="absolute top-2 right-2">
+@csrf
+<button aria-label="উইশলিস্টে যোগ করুন" type="submit" class="w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center transition-colors shadow-sm {{ in_array($product->id, $wishlistIds) ? 'text-error' : 'text-on-surface-variant active:text-error' }}">
+<span class="material-symbols-outlined text-[18px]" style="{{ in_array($product->id, $wishlistIds) ? 'font-variation-settings: \'FILL\' 1;' : '' }}">favorite</span>
 </button>
-<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface/90 backdrop-blur-sm flex items-center gap-1 text-[11px] font-bold text-on-surface shadow-xs">
-<span class="material-symbols-outlined text-[13px] text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
-<span>৪.৮</span>
-</div>
+</form>
 </div>
 <div class="p-2.5 flex flex-col gap-1.5 flex-1 justify-between">
 <div>
 <div class="flex items-center justify-between">
-<span class="px-1.5 py-0.5 rounded bg-surface-container font-label-sm text-[10px] text-secondary font-semibold">৫০০ গ্রাম</span>
-<span class="text-[10px] text-primary font-bold">সুন্দরবন</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container font-label-sm text-[10px] text-secondary font-semibold">@if ($product->defaultVariant()?->weight_grams){{ $product->defaultVariant()->weight_grams }} গ্রাম @endif</span>
 </div>
-<h3 class="font-title-md text-[14px] leading-tight text-on-surface font-bold mt-1 line-clamp-1">সুন্দরবনের খলিশা মধু</h3>
+<h3 class="font-title-md text-[14px] leading-tight text-on-surface font-bold mt-1 line-clamp-1"><a href="{{ route('products.show', $product->slug) }}">{{ $product->name['bn'] ?? $product->name['en'] ?? '' }}</a></h3>
 </div>
 <div class="flex items-baseline gap-1.5 pt-0.5">
-<span class="font-title-lg text-[16px] text-primary font-bold">৳৭৫০</span>
-<span class="font-body-sm text-[12px] text-outline line-through">৳৮৫০</span>
+<span class="font-title-lg text-[16px] text-primary font-bold">৳{{ number_format($range['min'] / 100, 0) }}@if ($range['max'] > $range['min']) – ৳{{ number_format($range['max'] / 100, 0) }}@endif</span>
 </div>
-<button class="w-full h-9 rounded-lg bg-surface-container-high hover:bg-primary-container hover:text-on-primary text-on-surface font-label-sm text-[12px] font-bold flex items-center justify-center gap-1 active:scale-[0.98] transition-all">
+<form action="{{ route('cart.items.store') }}" method="POST">
+@csrf
+<input type="hidden" name="product_id" value="{{ $product->id }}">
+<input type="hidden" name="variant_id" value="{{ $product->defaultVariant()?->id }}">
+<input type="hidden" name="qty" value="1">
+<button type="submit" class="w-full h-9 rounded-lg bg-surface-container-high hover:bg-primary-container hover:text-on-primary text-on-surface font-label-sm text-[12px] font-bold flex items-center justify-center gap-1 active:scale-[0.98] transition-all" {{ ($product->defaultVariant()?->inventoryItem?->available() ?? 0) <= 0 ? 'disabled' : '' }}>
 <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
 <span>ব্যাগে যোগ করুন</span>
 </button>
+</form>
 </div>
 </div>
-<!-- Product Card 2 -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col justify-between shadow-[0_4px_16px_rgba(56,39,25,0.04)]">
-<div class="relative aspect-square bg-surface-container-low overflow-hidden">
-<img class="w-full h-full object-cover" alt="Fresh natural mustard flower honey in premium glass jar with thick creamy texture and yellow floral undertones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATx0Q4eJ0x8gr4N6UvGqNfyxT7I5hQoALZSAyv38obIV-Tt7oC2oeezUti8haK89uTblAp4pKTMS_SLLuBe9w1th-qkJRXDXdp3HuONN3AOKR9JKr1YTlnGekTmxmOEVHSYiUX0Dc2AOAKQq5RBukL2SGe3HwiLQki8b-YJ8a4f7-oazVs0XYtr8usLJHWETnVoqR4IOFFt1Zz8_VE1T8z9FDhAov6QPTL5EW9TW4X"/>
-<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold shadow-sm">-১১%</span>
-<button aria-label="উইশলিস্টে যোগ করুন" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant active:text-error transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface/90 backdrop-blur-sm flex items-center gap-1 text-[11px] font-bold text-on-surface shadow-xs">
-<span class="material-symbols-outlined text-[13px] text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
-<span>৪.৭</span>
-</div>
-</div>
-<div class="p-2.5 flex flex-col gap-1.5 flex-1 justify-between">
-<div>
-<div class="flex items-center justify-between">
-<span class="px-1.5 py-0.5 rounded bg-surface-container font-label-sm text-[10px] text-secondary font-semibold">৫০০ গ্রাম</span>
-<span class="text-[10px] text-primary font-bold">সিরাজগঞ্জ</span>
-</div>
-<h3 class="font-title-md text-[14px] leading-tight text-on-surface font-bold mt-1 line-clamp-1">সরিষা ফুলের মধু</h3>
-</div>
-<div class="flex items-baseline gap-1.5 pt-0.5">
-<span class="font-title-lg text-[16px] text-primary font-bold">৳৫৮০</span>
-<span class="font-body-sm text-[12px] text-outline line-through">৳৬৫০</span>
-</div>
-<button class="w-full h-9 rounded-lg bg-surface-container-high hover:bg-primary-container hover:text-on-primary text-on-surface font-label-sm text-[12px] font-bold flex items-center justify-center gap-1 active:scale-[0.98] transition-all">
-<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
-<span>ব্যাগে যোগ করুন</span>
-</button>
-</div>
-</div>
-<!-- Product Card 3 -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col justify-between shadow-[0_4px_16px_rgba(56,39,25,0.04)]">
-<div class="relative aspect-square bg-surface-container-low overflow-hidden">
-<img class="w-full h-full object-cover" alt="Crispy golden roasted whole cashew nuts in a boutique craft pouch on warm wooden texture with subtle herbs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5MLkwWYil6Z9FIYH0K5bCMtIN-cMJ48aGWcD2vMLAlxGUh_lNUXb4pgDWwMmBoMvjrgCm9-xw-xUn1Nq7FzOWDBqxg3ReLgLO-eIgI18BTjbs0azlGjWdtAegxUM2TYgZcEjxWQgNgwyAehC1iYdHDD1-isT4j0xDgs17RaDDYTKCiasRSQxU7ASSbRfQOp0kr-Nua9-VmVYfNU0HfjoHLJAnKeAT0UUcUZUr0ITr"/>
-<button aria-label="উইশলিস্টে যোগ করুন" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant active:text-error transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface/90 backdrop-blur-sm flex items-center gap-1 text-[11px] font-bold text-on-surface shadow-xs">
-<span class="material-symbols-outlined text-[13px] text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
-<span>৪.৯</span>
-</div>
-</div>
-<div class="p-2.5 flex flex-col gap-1.5 flex-1 justify-between">
-<div>
-<div class="flex items-center justify-between">
-<span class="px-1.5 py-0.5 rounded bg-surface-container font-label-sm text-[10px] text-secondary font-semibold">২৫০ গ্রাম</span>
-<span class="text-[10px] text-primary font-bold">আমদানি</span>
-</div>
-<h3 class="font-title-md text-[14px] leading-tight text-on-surface font-bold mt-1 line-clamp-1">প্রিমিয়াম কাজুবাদাম</h3>
-</div>
-<div class="flex items-baseline gap-1.5 pt-0.5">
-<span class="font-title-lg text-[16px] text-primary font-bold">৳৪৫০</span>
-</div>
-<button class="w-full h-9 rounded-lg bg-surface-container-high hover:bg-primary-container hover:text-on-primary text-on-surface font-label-sm text-[12px] font-bold flex items-center justify-center gap-1 active:scale-[0.98] transition-all">
-<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
-<span>ব্যাগে যোগ করুন</span>
-</button>
-</div>
-</div>
-<!-- Product Card 4 -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col justify-between shadow-[0_4px_16px_rgba(56,39,25,0.04)]">
-<div class="relative aspect-square bg-surface-container-low overflow-hidden">
-<img class="w-full h-full object-cover" alt="Crunchy raw Californian whole almonds displayed in an artisanal earthen dish on soft linen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyisaiNzCDtIWB7i8bgwCKqWuOGy7rvvrW-52WtUtBrOz4ZRqnC_2YrODeo64CsWYYA1I4IfFcYRvIAIlHra12bgZj0BdiKIgJIXCJzRqamvxAGADDxJcKFPCGZknU1onl9DWPUjVUQvU_ZGfRhwQMtnANmMr_qEmfr5vpBYv6LDOTje63wyAvQ4EKfhUiuVJrJVWa5HD9Dwx7U8ek7lVuIfftH0aprNwJwueu_7dE"/>
-<button aria-label="উইশলিস্টে যোগ করুন" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant active:text-error transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface/90 backdrop-blur-sm flex items-center gap-1 text-[11px] font-bold text-on-surface shadow-xs">
-<span class="material-symbols-outlined text-[13px] text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
-<span>৪.৮</span>
-</div>
-</div>
-<div class="p-2.5 flex flex-col gap-1.5 flex-1 justify-between">
-<div>
-<div class="flex items-center justify-between">
-<span class="px-1.5 py-0.5 rounded bg-surface-container font-label-sm text-[10px] text-secondary font-semibold">২৫০ গ্রাম</span>
-<span class="text-[10px] text-primary font-bold">ক্যালিফোর্নিয়া</span>
-</div>
-<h3 class="font-title-md text-[14px] leading-tight text-on-surface font-bold mt-1 line-clamp-1">কাঠবাদাম ফ্রেশ</h3>
-</div>
-<div class="flex items-baseline gap-1.5 pt-0.5">
-<span class="font-title-lg text-[16px] text-primary font-bold">৳৩৮০</span>
-</div>
-<button class="w-full h-9 rounded-lg bg-surface-container-high hover:bg-primary-container hover:text-on-primary text-on-surface font-label-sm text-[12px] font-bold flex items-center justify-center gap-1 active:scale-[0.98] transition-all">
-<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
-<span>ব্যাগে যোগ করুন</span>
-</button>
-</div>
-</div>
+@empty
+<p class="col-span-2 text-center font-body-sm text-body-sm text-on-surface-variant py-8">এখনো কোনো পণ্য যুক্ত করা হয়নি।</p>
+@endforelse
 </div>
 </section>
 <!-- 5. Brand Story Card -->
@@ -1281,5 +1059,5 @@
       btn.classList.add('bg-primary', 'text-on-primary');
     });
   });
-</script><footer class="w-full bg-surface-container-low px-margin-mobile pt-space-lg pb-space-lg mt-space-xl"><div class="flex flex-col gap-6"><div class="flex flex-col gap-2"><div class="flex items-center gap-2"><img alt="Madhuban Artisanal Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFIFNGzXweVjOqxHaPw7vl4mRqYapFexb7sTEax30b6KddO6J55BazqkZwtgLDTkmQEFTrk1YSc60_IRHqZUmc9KpdGBJCl2y-uKh1sPuQypVOcHyEJ09Mc362OEEMkF5VpdNL3y0EjdiCOikFdMQDA5BPL3Qr0W1RXvUNakkvmyukpng3n5U1bhFQpGi6Nt_VC35KHVWXv6LK3Wdh1h_SPqqd1pOMT1tXLI8F5AVv"/><span class="font-headline-sm text-headline-sm text-primary font-bold">মধুবন</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">সুন্দরবনের খাঁটি মধু ও পাহাড়ি অর্গানিক বাদামের নির্ভরযোগ্য অনলাইন ঠিকানা। শতভাগ বিশুদ্ধতা ও স্বাস্থ্য সুরক্ষার নিশ্চয়তা।</p></div><div class="grid grid-cols-2 gap-3 py-2"><div class="flex items-center gap-2 p-3 bg-surface-container-lowest rounded-lg shadow-[0_2px_8px_rgba(56,39,25,0.03)]"><span class="material-symbols-outlined text-primary text-[22px]">verified_user</span><div><p class="font-title-md text-[13px] leading-tight text-on-surface font-semibold">১০০% খাঁটি পণ্য</p><p class="font-body-sm text-[11px] text-on-surface-variant">ল্যাব টেস্ট সার্টিফাইড</p></div></div><div class="flex items-center gap-2 p-3 bg-surface-container-lowest rounded-lg shadow-[0_2px_8px_rgba(56,39,25,0.03)]"><span class="material-symbols-outlined text-primary text-[22px]">local_shipping</span><div><p class="font-title-md text-[13px] leading-tight text-on-surface font-semibold">দ্রুত ডেলিভারি</p><p class="font-body-sm text-[11px] text-on-surface-variant">সারাদেশে হোম সার্ভিস</p></div></div></div><div class="flex flex-col gap-2.5"><p class="font-label-md text-label-md text-on-surface uppercase font-bold">পেমেন্ট পার্টনার</p><div class="flex flex-wrap items-center gap-2"><span class="px-3 py-1.5 bg-surface-container-lowest text-on-surface rounded-full text-label-sm font-label-sm shadow-[0_1px_4px_rgba(0,0,0,0.04)]">bKash</span><span class="px-3 py-1.5 bg-surface-container-lowest text-on-surface rounded-full text-label-sm font-label-sm shadow-[0_1px_4px_rgba(0,0,0,0.04)]">Nagad</span><span class="px-3 py-1.5 bg-surface-container-lowest text-on-surface rounded-full text-label-sm font-label-sm shadow-[0_1px_4px_rgba(0,0,0,0.04)]">Debit/Credit Card</span><span class="px-3 py-1.5 bg-surface-container-lowest text-on-surface rounded-full text-label-sm font-label-sm shadow-[0_1px_4px_rgba(0,0,0,0.04)]">ক্যাশ অন ডেলিভারি</span></div></div><div class="flex flex-col gap-2 pt-2"><p class="font-label-md text-label-md text-on-surface uppercase font-bold">যোগাযোগ করুন</p><div class="flex gap-3"><a class="flex-1 flex items-center justify-center gap-1.5 h-11 bg-primary text-on-primary rounded-full font-label-md text-label-md" href="tel:+8801700000000"><span class="material-symbols-outlined text-[18px]">call</span><span>কল করুন</span></a><a class="flex-1 flex items-center justify-center gap-1.5 h-11 bg-surface-container-lowest text-on-surface rounded-full font-label-md text-label-md shadow-[0_1px_6px_rgba(0,0,0,0.05)]" href="https://wa.me/"><span class="material-symbols-outlined text-[18px] text-primary">chat</span><span>হোয়াটসঅ্যাপ</span></a></div></div><div class="text-center pt-4"><p class="font-body-sm text-label-sm text-outline">© ২০২৪ মধুবন অর্গানিক ফুডস। সর্বস্বত্ব সংরক্ষিত।</p></div></div></footer></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(56,39,25,0.06)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-gutter-mobile"><a aria-current="page" class="flex flex-col items-center justify-center gap-1 min-w-[56px] h-12 transition-colors text-primary font-bold" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm">হোম</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="shop" href="#"><span class="material-symbols-outlined text-[22px]">storefront</span><span class="font-label-sm text-label-sm">ক্যাটালগ</span></a><a class="relative flex flex-col items-center justify-center gap-1 min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-1 right-2 min-w-[15px] h-[15px] bg-primary-container text-on-primary text-[9px] font-bold rounded-full flex items-center justify-center px-0.5">৩</span><span class="font-label-sm text-label-sm">কার্ট</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined text-[22px]">favorite</span><span class="font-label-sm text-label-sm">উইশলিস্ট</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="account" href="#"><span class="material-symbols-outlined text-[22px]">person</span><span class="font-label-sm text-label-sm">প্রোফাইল</span></a></div></nav></div>
+</script></div>
 @endsection

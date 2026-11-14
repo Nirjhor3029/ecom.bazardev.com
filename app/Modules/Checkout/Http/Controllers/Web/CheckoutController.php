@@ -11,6 +11,7 @@ use App\Modules\Checkout\Actions\PlaceOrderAction;
 use App\Modules\Checkout\Services\PricingService;
 use App\Modules\Customers\Models\Customer;
 use App\Modules\Customers\Services\OtpService;
+use App\Modules\Customers\Services\WishlistService;
 use App\Modules\Core\Support\PhoneNumber;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -69,7 +70,7 @@ class CheckoutController extends Controller
         return view('storefront.checkout.otp', ['phone' => session('checkout_phone')]);
     }
 
-    public function verifyOtp(Request $request, OtpService $otp): RedirectResponse
+    public function verifyOtp(Request $request, OtpService $otp, WishlistService $wishlist): RedirectResponse
     {
         $request->validate(['code' => ['required', 'string']]);
         $phone = session('checkout_phone');
@@ -87,6 +88,7 @@ class CheckoutController extends Controller
         }
 
         Auth::guard('customer')->login($customer);
+        $wishlist->merge($customer);
         session()->forget('checkout_phone');
 
         return redirect()->route('checkout.show');

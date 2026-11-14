@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use App\Modules\Cart\Services\CartService;
 use App\Modules\Cart\Support\StorefrontCart;
+use App\Modules\Catalog\Models\Category;
+use App\Modules\Checkout\Services\PricingService;
+use App\Modules\Customers\Services\WishlistService;
 use App\Modules\Notifications\Contracts\SmsProvider;
 use App\Modules\Notifications\Drivers\LogSmsProvider;
 use App\Modules\Shipping\Contracts\Courier;
@@ -40,14 +43,26 @@ class AppServiceProvider extends ServiceProvider
     protected function shareStorefrontCartCount(): void
     {
         View::composer('storefront.*', function ($view) {
-            if (! request()->hasCookie(StorefrontCart::COOKIE) && ! auth('customer')->check()) {
-                $view->with('cartItemCount', 0);
+            $customer = auth('customer')->user();
+
+            $view->with('navCategories', Category::query()
+                ->whereNull('parent_id')->where('is_active', true)->orderBy('sort')->get());
+
+            $wishlistIds = app(WishlistService::class)->ids($customer);
+            $view->with('wishlistIds', $wishlistIds);
+            $view->with('wishlistCount', count($wishlistIds));
+
+            if (! request()->hasCookie(StorefrontCart::COOKIE) && ! $customer) {
+                $view->with(['cartItemCount' => 0, 'cartSubtotal' => 0]);
 
                 return;
             }
 
             $cart = StorefrontCart::current(request(), app(CartService::class));
+            $priced = app(PricingService::class)->calculate($cart);
+
             $view->with('cartItemCount', $cart->items->sum('qty'));
+            $view->with('cartSubtotal', $priced['subtotal'] - $priced['discount_total']);
         });
     }
 

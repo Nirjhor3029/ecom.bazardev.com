@@ -46,7 +46,9 @@ class StorefrontCheckoutTest extends TestCase
         $customer = Customer::query()->create(['phone' => '+8801911112222', 'phone_verified_at' => now()]);
         $this->actingAs($customer, 'customer');
 
-        $this->get('/products/test-honey')->assertOk()->assertSee('টেস্ট মধু');
+        // Asserts on the real product name AND its real variant price, so this fails
+        // again if the PDP ever regresses to showing static/mockup demo data.
+        $this->get('/products/test-honey')->assertOk()->assertSee('টেস্ট মধু')->assertSee('৳400');
 
         $this->post('/cart/items', ['variant_id' => $this->variant->id, 'qty' => 1])->assertRedirect();
         $this->get('/cart')->assertOk()->assertSee('টেস্ট মধু');

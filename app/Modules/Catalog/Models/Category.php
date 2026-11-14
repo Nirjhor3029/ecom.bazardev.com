@@ -38,6 +38,11 @@ class Category extends Model
         return $this->belongsTo(Media::class, 'image_id');
     }
 
+    public function imageUrl(): ?string
+    {
+        return $this->image?->url();
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

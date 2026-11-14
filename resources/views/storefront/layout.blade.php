@@ -15,32 +15,24 @@
     @vite(['resources/css/app.css'])
 </head>
 <body class="flex h-full flex-col font-sans text-stone-800">
-    {{-- home.blade.php / products/show.blade.php bring their own full-chrome header+footer
-         (ported verbatim per page from the reference mockups) and set @section('bare-chrome', 'yes')
-         to skip the older generic storefront header/footer below. Cart/checkout/orders pages are
-         untouched and keep using the original chrome. --}}
-    @if (trim($__env->yieldContent('bare-chrome')) !== 'yes')
-        @include('storefront.partials.header')
-    @endif
+    @include('storefront.partials.header')
 
-    @if (session('success'))
-        <div class="mx-auto mt-4 w-full max-w-6xl px-4"><div class="rounded-md bg-green-50 px-4 py-2 text-sm text-green-700">{{ session('success') }}</div></div>
-    @endif
-    @if ($errors->any())
-        <div class="mx-auto mt-4 w-full max-w-6xl px-4">
-            <div class="rounded-md bg-red-50 px-4 py-2 text-sm text-red-700">
-                @foreach ($errors->all() as $error) <div>{{ $error }}</div> @endforeach
+    <main class="flex-1 w-full pt-36 pb-28 lg:pb-0 bg-surface min-h-screen">
+        @if (session('success'))
+            <div class="mx-auto w-full max-w-7xl px-6 lg:px-12 pt-4"><div class="rounded-md bg-green-50 px-4 py-2 text-sm text-green-700">{{ session('success') }}</div></div>
+        @endif
+        @if ($errors->any())
+            <div class="mx-auto w-full max-w-7xl px-6 lg:px-12 pt-4">
+                <div class="rounded-md bg-red-50 px-4 py-2 text-sm text-red-700">
+                    @foreach ($errors->all() as $error) <div>{{ $error }}</div> @endforeach
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
 
-    <main class="flex-1">
         @yield('content')
     </main>
 
-    @if (trim($__env->yieldContent('bare-chrome')) !== 'yes')
-        @include('storefront.partials.footer')
-    @endif
+    @include('storefront.partials.footer')
 
     @yield('scripts')
 </body>
