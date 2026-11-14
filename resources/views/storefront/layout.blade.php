@@ -14,7 +14,7 @@
 
     @vite(['resources/css/app.css'])
 </head>
-<body class="flex h-full flex-col font-body-md text-on-surface bg-surface">
+<body class="flex min-h-full flex-col font-body-md text-on-surface bg-surface">
     @include('storefront.partials.header')
 
     <main class="flex-1 w-full pt-36 pb-28 lg:pb-0 bg-surface min-h-screen">
