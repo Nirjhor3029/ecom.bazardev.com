@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +16,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(RoleAndPermissionSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        if (! User::query()->where('email', 'admin@bazardev.com')->exists()) {
+            $password = Str::password(20);
+
+            $admin = User::query()->create([
+                'name' => 'Super Admin',
+                'email' => 'admin@bazardev.com',
+                'password' => $password,
+                'is_active' => true,
+            ]);
+
+            $admin->assignRole('Super Admin');
+
+            file_put_contents(
+                storage_path('app/seeded-admin-credentials.txt'),
+                "email: admin@bazardev.com\npassword: {$password}\n(delete this file after first login)\n",
+            );
+
+            $this->command?->info('Super Admin created — credentials written to storage/app/seeded-admin-credentials.txt');
+        }
     }
 }
