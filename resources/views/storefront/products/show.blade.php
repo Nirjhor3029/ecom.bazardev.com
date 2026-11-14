@@ -128,6 +128,7 @@
     }
   </script>
 </div>
+</div>
 
 <!-- ================= MOBILE (below lg) — ported verbatim from product-details-mobile-code.html -->
 <!-- Mobile PDP intentionally uses its own compact back-button app-bar (no shared
@@ -169,6 +170,12 @@
 <div class="w-full h-full flex-shrink-0 snap-center relative flex items-center justify-center bg-surface-container text-8xl">🍯</div>
 @endforelse
 </div>
+@if (! empty(($product->content ?? [])['badge']))
+<span class="absolute top-3 left-3 inline-flex items-center gap-1 bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm"><span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">eco</span>{{ $product->content['badge'] }}</span>
+@endif
+@if ($product->galleryImages()->count() > 1)
+<span class="absolute bottom-3 left-3 inline-flex items-center gap-1 bg-inverse-surface/70 text-inverse-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded-full backdrop-blur-sm"><span class="material-symbols-outlined text-[13px]">photo_library</span><span id="slide-counter">১</span>/{{ \App\Modules\Core\Support\Numerals::bn($product->galleryImages()->count()) }}</span>
+@endif
 <!-- Wishlist Heart Button -->
 <form action="{{ route('wishlist.toggle', $product) }}" method="POST" class="absolute top-3 right-3">
 @csrf
@@ -214,9 +221,9 @@
 <div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex items-center justify-between">
 <div class="flex items-baseline gap-2.5">
 <span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary" id="current-price">৳{{ number_format(($mobileDefaultVariant?->effectivePrice() ?? 0) / 100, 0) }}</span>
-@if ($mobileDefaultVariant && $mobileDefaultVariant->sale_price)
-<span class="font-title-md text-title-md line-through text-outline" id="regular-price">৳{{ number_format($mobileDefaultVariant->price / 100, 0) }}</span>
-@endif
+@php($mobileDisc = ($mobileDefaultVariant && $mobileDefaultVariant->sale_price && $mobileDefaultVariant->effectivePrice() < $mobileDefaultVariant->price) ? (int) round((1 - $mobileDefaultVariant->effectivePrice() / $mobileDefaultVariant->price) * 100) : 0)
+<span class="font-title-md text-title-md line-through text-outline {{ $mobileDisc ? '' : 'hidden' }}" id="regular-price">৳{{ number_format(($mobileDefaultVariant?->price ?? 0) / 100, 0) }}</span>
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold {{ $mobileDisc ? '' : 'hidden' }}" id="mobile-discount">{{ \App\Modules\Core\Support\Numerals::bn($mobileDisc) }}% ছাড়</span>
 </div>
 <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">ভ্যাট অন্তর্ভুক্ত</span>
 </div>
@@ -234,9 +241,9 @@
 @foreach ($mobileActiveVariants as $variant)
 @php($mobileAvailable = ($variant->inventoryItem?->available() ?? 0) > 0)
 <label class="variant-pill min-h-[48px] px-3 py-2.5 rounded-xl {{ $mobileAvailable ? 'bg-surface-container-lowest text-on-surface shadow-sm cursor-pointer' : 'bg-surface-dim/60 text-outline cursor-not-allowed opacity-70' }} text-left flex items-center justify-between has-[:checked]:bg-primary has-[:checked]:text-on-primary has-[:checked]:shadow-md transition-all">
-<input type="radio" name="variant_id" value="{{ $variant->id }}" class="hidden pdp-variant-radio-mobile" data-price="{{ $variant->effectivePrice() }}" {{ $loop->first ? 'checked' : '' }} {{ $mobileAvailable ? '' : 'disabled' }}>
+<input type="radio" name="variant_id" value="{{ $variant->id }}" class="hidden pdp-variant-radio-mobile" data-price="{{ $variant->effectivePrice() }}" data-original="{{ $variant->price }}" data-discount="{{ ($variant->sale_price && $variant->effectivePrice() < $variant->price) ? (int) round((1 - $variant->effectivePrice() / $variant->price) * 100) : 0 }}" data-label="{{ $variant->weight_grams ? ($variant->weight_grams >= 1000 ? \App\Modules\Core\Support\Numerals::bn(rtrim(rtrim(number_format($variant->weight_grams / 1000, 1), '0'), '.')).' কেজি' : \App\Modules\Core\Support\Numerals::bn($variant->weight_grams).' গ্রাম') : $variant->sku }}" {{ $variant->id === $mobileDefaultVariant?->id ? 'checked' : '' }} {{ $mobileAvailable ? '' : 'disabled' }}>
 <div class="flex flex-col">
-<span class="font-label-md text-label-md font-semibold">{{ $variant->weight_grams ? $variant->weight_grams.' গ্রাম' : ($variant->sku ?? '') }}</span>
+<span class="font-label-md text-label-md font-semibold">{{ $variant->weight_grams ? ($variant->weight_grams >= 1000 ? \App\Modules\Core\Support\Numerals::bn(rtrim(rtrim(number_format($variant->weight_grams / 1000, 1), '0'), '.')).' কেজি' : \App\Modules\Core\Support\Numerals::bn($variant->weight_grams).' গ্রাম') : ($variant->sku ?? '') }}@if ($variant->options['tag'] ?? null) <span class="font-normal text-[11px] opacity-80">({{ $variant->options['tag'] }})</span>@endif</span>
 <span class="font-body-sm text-body-sm">{{ $mobileAvailable ? '৳'.number_format($variant->effectivePrice() / 100, 0) : 'স্টক আউট' }}</span>
 </div>
 </label>
@@ -304,55 +311,27 @@
 </div>
 </section>
 @endif
-<!-- 11. Compact Product FAQ Accordion -->
+<!-- 11. FAQ (data: content.faq) -->
+@php($mobileFaq = ($product->content ?? [])['faq'] ?? [])
+@if ($mobileFaq)
 <section class="px-gutter-mobile pt-space-lg mb-4">
 <div class="flex items-center gap-2 mb-space-sm">
 <span class="material-symbols-outlined text-primary text-[22px]">quiz</span>
 <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">সাধারণ জিজ্ঞাসা (FAQ)</h3>
 </div>
 <div class="flex flex-col gap-2">
-<!-- FAQ 1 -->
+@foreach ($mobileFaq as $item)
 <div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
-<button class="w-full min-h-[48px] px- space-md py-3 px-3.5 flex items-center justify-between text-left active:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)" type="button">
-<span class="font-label-md text-label-md text-on-surface font-semibold pr-2">খলিশা মধু কি জমে যেতে পারে?</span>
+<button class="w-full min-h-[48px] py-3 px-3.5 flex items-center justify-between text-left active:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)" type="button">
+<span class="font-label-md text-label-md text-on-surface font-semibold pr-2">{{ $item['q'] ?? $item[0] }}</span>
 <span class="material-symbols-outlined text-outline transition-transform duration-200">keyboard_arrow_down</span>
 </button>
-<div class="accordion-content hidden px-3.5 pb-3 font-body-sm text-body-sm text-on-surface-variant">
-          খাঁটি মধু শীতকালে বা অতিরিক্ত ঠান্ডায় স্ফটিক (Granulation) রূপ নিতে পারে। এটি খাঁটি মধুর একটি স্বাভাবিক ভৌত ধর্ম। হালকা কুসুম গরম পানিতে বৈয়াম কিছুক্ষণ রাখলে আবার তরল হয়ে যায়।
-        </div>
+<div class="accordion-content hidden px-3.5 pb-3 font-body-sm text-body-sm text-on-surface-variant">{{ $item['a'] ?? $item[1] }}</div>
 </div>
-<!-- FAQ 2 -->
-<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
-<button class="w-full min-h-[48px] px- space-md py-3 px-3.5 flex items-center justify-between text-left active:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)" type="button">
-<span class="font-label-md text-label-md text-on-surface font-semibold pr-2">মধুটি কি ডায়াবেটিস রোগীরা খেতে পারবেন?</span>
-<span class="material-symbols-outlined text-outline transition-transform duration-200">keyboard_arrow_down</span>
-</button>
-<div class="accordion-content hidden px-3.5 pb-3 font-body-sm text-body-sm text-on-surface-variant">
-          আমাদের মধু সম্পূর্ণ প্রাকৃতিক ও চিনিমুক্ত। তবে ডায়াবেটিস রোগীদের যেকোনো মিষ্টি জাতীয় উপাদান গ্রহণের পূর্বে চিকিৎসকের পরামর্শ নেওয়া আবশ্যক।
-        </div>
-</div>
-<!-- FAQ 3 -->
-<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
-<button class="w-full min-h-[48px] px- space-md py-3 px-3.5 flex items-center justify-between text-left active:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)" type="button">
-<span class="font-label-md text-label-md text-on-surface font-semibold pr-2">আমি কীভাবে নিশ্চিত হব এটি খাঁটি মধু?</span>
-<span class="material-symbols-outlined text-outline transition-transform duration-200">keyboard_arrow_down</span>
-</button>
-<div class="accordion-content hidden px-3.5 pb-3 font-body-sm text-body-sm text-on-surface-variant">
-          প্রতিটি বোতলের সাথে আমাদের ল্যাব টেস্ট কিউআর কোড থাকে যা স্ক্যান করে খাঁটি মানের সার্টিফিকেট দেখতে পারবেন। এছাড়াও রয়েছে ১০০% ক্যাশব্যাক নিশ্চয়তা।
-        </div>
-</div>
-<!-- FAQ 4 -->
-<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
-<button class="w-full min-h-[48px] px- space-md py-3 px-3.5 flex items-center justify-between text-left active:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)" type="button">
-<span class="font-label-md text-label-md text-on-surface font-semibold pr-2">ডেলিভারি পাওয়ার পর পণ্য ভাঙা থাকলে করণীয়?</span>
-<span class="material-symbols-outlined text-outline transition-transform duration-200">keyboard_arrow_down</span>
-</button>
-<div class="accordion-content hidden px-3.5 pb-3 font-body-sm text-body-sm text-on-surface-variant">
-          ডেলিভারি ম্যানের সামনে পণ্য দেখে নিন। কোনো সমস্যা পরিলক্ষিত হলে ডেলিভারি ম্যান থাকা অবস্থাতেই আমাদের হেল্পলাইনে কল দিন, আমরা বিনা খরচে তাৎক্ষণিক রিপ্লেসমেন্ট পাঠাব।
-        </div>
-</div>
+@endforeach
 </div>
 </section>
+@endif
 <!-- 12. STICKY BOTTOM PURCHASE BAR (sits just above the shared mobile bottom-nav) -->
 <aside aria-label="Quick Purchase Bar" class="fixed bottom-16 left-0 right-0 z-40 bg-surface/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(56,39,25,0.08)]">
 <div class="max-w-[430px] mx-auto px-gutter-mobile py-2.5 flex items-center justify-between gap-3">
@@ -362,7 +341,7 @@
 <div class="flex items-baseline gap-1 mt-0.5">
 <span class="font-title-lg text-title-lg text-primary font-bold leading-tight" id="bar-price">৳{{ number_format(($mobileDefaultVariant?->effectivePrice() ?? 0) / 100, 0) }}</span>
 </div>
-<span class="font-label-sm text-[11px] text-outline truncate font-medium" id="bar-variant">@if ($mobileDefaultVariant?->weight_grams){{ $mobileDefaultVariant->weight_grams }} গ্রাম@endif</span>
+<span class="font-label-sm text-[11px] text-outline truncate font-medium" id="bar-variant">@if ($mobileDefaultVariant?->weight_grams){{ $mobileDefaultVariant->weight_grams >= 1000 ? \App\Modules\Core\Support\Numerals::bn(rtrim(rtrim(number_format($mobileDefaultVariant->weight_grams / 1000, 1), '0'), '.')).' কেজি' : \App\Modules\Core\Support\Numerals::bn($mobileDefaultVariant->weight_grams).' গ্রাম' }}@endif</span>
 </div>
 <!-- Action Buttons -->
 <div class="flex items-center gap-2 flex-1 justify-end">
@@ -371,8 +350,8 @@
 <span class="material-symbols-outlined text-[19px]">add_shopping_cart</span>
 <span class="whitespace-nowrap">কার্টে যোগ</span>
 </button>
-<!-- Buy Now (same action — no separate instant-checkout flow yet) -->
-<button form="pdp-add-to-cart-form" type="submit" class="min-h-[46px] px-4 py-2 rounded-full bg-gradient-to-r from-primary-container to-primary text-on-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1 shadow-md hover:shadow-lg active:scale-95 transition-all flex-shrink-0" {{ $mobileInStock ? '' : 'disabled' }}>
+<!-- Buy Now: add to cart, then straight to checkout -->
+<button form="pdp-add-to-cart-form" type="submit" name="buy_now" value="1" class="min-h-[46px] px-4 py-2 rounded-full bg-gradient-to-r from-primary-container to-primary text-on-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1 shadow-md hover:shadow-lg active:scale-95 transition-all flex-shrink-0" {{ $mobileInStock ? '' : 'disabled' }}>
 <span class="material-symbols-outlined text-[18px]">bolt</span>
 <span class="whitespace-nowrap">এখনই কিনুন</span>
 </button>
@@ -397,6 +376,14 @@
     const formatted = '৳' + toBengaliNum(Math.round(unitPrice * qty / 100));
     const currentPriceEl = document.getElementById('current-price');
     const barPriceEl = document.getElementById('bar-price');
+    const orig = document.getElementById('regular-price'), disc = document.getElementById('mobile-discount'), d = parseInt(checked.dataset.discount || '0', 10);
+    if (orig && disc) {
+      orig.innerText = '৳' + Math.round((parseInt(checked.dataset.original, 10) || 0) * qty / 100);
+      disc.innerText = toBengaliNum(d) + '% ছাড়';
+      orig.classList.toggle('hidden', !d); disc.classList.toggle('hidden', !d);
+    }
+    const barVariant = document.getElementById('bar-variant');
+    if (barVariant && checked.dataset.label) barVariant.innerText = checked.dataset.label;
     if (currentPriceEl) currentPriceEl.innerText = formatted;
     if (barPriceEl) barPriceEl.innerText = formatted;
   }
@@ -417,6 +404,12 @@
     slider.scrollTo({ left: width * index, behavior: 'smooth' });
     updateSliderUI(index);
   }
+
+  if (slider) slider.addEventListener('scroll', () => {
+    const i = Math.round(slider.scrollLeft / (slider.clientWidth || 1));
+    const c = document.getElementById('slide-counter'); if (c) c.innerText = toBengaliNum(i + 1);
+    updateSliderUI(i);
+  });
 
   function updateSliderUI(index) {
     thumbs.forEach((th, i) => {

@@ -189,7 +189,7 @@ class DemoCatalogSeeder extends Seeder
                 'slug' => 'sundarban-khalisha-honey', 'cat' => 'honey', 'bn' => 'সুন্দরবনের খলিশা মধু', 'en' => 'Sundarbans Raw Khalisha Floral Honey',
                 'short' => '১০০% খাঁটি র খলিশা মধু',
                 'desc' => 'সুন্দরবনের গভীর ম্যানগ্রোভ বনের খলিশা ফুলের প্রাকৃতিক নেকটার থেকে মৌয়ালদের দ্বারা সংগৃহীত কাঁচা ও অপ্রক্রিয়াজাত খাঁটি মধু। এতে রয়েছে সজীব প্রাকৃতিক এনজাইম, অমূল্য পরাগরেণু ও হালকা মনোহর সুবাস।',
-                'variants' => $honeyWeights('KHA', [420, 380, 750, null, 1450, 1350, 2800]),
+                'variants' => $honeyWeights('KHA', [480, 420, 850, 750, 1650, 1450, 2800]),
                 'images' => ['khalisha-honey.jpg', 'khalisha-jar.jpg', 'honey-texture.jpg', 'honey-pouring.jpg', 'mangrove.jpg'],
                 'video' => true,
                 'reviews' => $khalishaReviews,
@@ -214,7 +214,7 @@ class DemoCatalogSeeder extends Seeder
                 'slug' => 'mustard-blossom-honey', 'cat' => 'honey', 'bn' => 'সরিষা ফুলের প্রাকৃতিক মধু', 'en' => 'Mustard Blossom Honey',
                 'short' => 'সরিষা ফুলের সুগন্ধি মধু',
                 'desc' => 'শীতের সরিষা খেতের হলুদ ফুল থেকে সংগৃহীত ক্রিমি, সুগন্ধি কাঁচা মধু। স্বাভাবিকভাবেই কিছুটা জমাট বাঁধে, যা এর খাঁটি হওয়ার প্রমাণ।',
-                'variants' => $honeyWeights('MUS', [330, 300, 580, null, 1100, 1020, 2150]),
+                'variants' => $honeyWeights('MUS', [360, 330, 650, 580, 1250, 1100, 2150]),
                 'images' => ['mustard-honey.jpg', 'mustard-jar.jpg', 'honey-texture.jpg', 'honey-pouring.jpg'],
                 'video' => true,
                 'reviews' => [
@@ -241,7 +241,7 @@ class DemoCatalogSeeder extends Seeder
                 'slug' => 'litchi-blossom-honey', 'cat' => 'honey', 'bn' => 'লিচু ফুলের খাঁটি মধু', 'en' => 'Litchi Blossom Honey',
                 'short' => 'দিনাজপুরের লিচু বাগানের মধু',
                 'desc' => 'বসন্তে ফোটা লিচু ফুলের নেকটার থেকে তৈরি হালকা সোনালী, ফলের মতো মিষ্টি সুবাসযুক্ত মধু।',
-                'variants' => $honeyWeights('LIT', [360, 330, 620, null, 1200, 1120, 2300]),
+                'variants' => $honeyWeights('LIT', [400, 360, 700, 620, 1350, 1200, 2300]),
                 'images' => ['litchi-honey.jpg', 'honey-texture.jpg', 'honey-pouring.jpg'],
                 'video' => true,
                 'reviews' => [

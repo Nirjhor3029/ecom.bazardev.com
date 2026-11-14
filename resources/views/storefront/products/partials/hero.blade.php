@@ -243,13 +243,13 @@ function pdpShare() {
   else if (navigator.clipboard) { navigator.clipboard.writeText(location.href); alert('লিংক কপি হয়েছে'); }
 }
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { document.getElementById('pdp-lightbox').classList.add('hidden'); pdpCloseVideo(); } });
-var bnDigits = function (s) { return String(s).replace(/\d/g, function (d) { return '০১২৩৪৫৬৭৮৯'[d]; }); };
+var pdpBn = function (s) { return String(s).replace(/\d/g, function (d) { return '০১২৩৪৫৬৭৮৯'[d]; }); };
 document.querySelectorAll('.pdp-variant-radio').forEach(function (radio) {
   radio.addEventListener('change', function () {
     var price = Math.round(radio.dataset.price / 100), orig = Math.round(radio.dataset.original / 100), disc = parseInt(radio.dataset.discount || '0', 10);
     document.getElementById('display-price').textContent = '৳' + price.toLocaleString('en-US');
     var o = document.getElementById('display-original-price'), d = document.getElementById('display-discount');
-    o.textContent = '৳' + orig.toLocaleString('en-US'); d.textContent = bnDigits(disc) + '% ছাড়';
+    o.textContent = '৳' + orig.toLocaleString('en-US'); d.textContent = pdpBn(disc) + '% ছাড়';
     o.classList.toggle('hidden', !disc); d.classList.toggle('hidden', !disc);
     var sku = document.getElementById('product-sku'); if (sku) sku.textContent = radio.dataset.sku;
     var stock = parseInt(radio.dataset.stock || '0', 10);
