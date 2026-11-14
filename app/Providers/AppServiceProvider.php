@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Modules\Cart\Services\CartService;
+use App\Modules\Cart\Support\StorefrontCart;
 use App\Modules\Notifications\Contracts\SmsProvider;
 use App\Modules\Notifications\Drivers\LogSmsProvider;
 use App\Modules\Shipping\Contracts\Courier;
@@ -9,6 +11,7 @@ use App\Modules\Shipping\Drivers\NullCourier;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +33,22 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerRateLimiters();
+        $this->shareStorefrontCartCount();
+    }
+
+    /** THM-7: the theme has no business logic — this is the one presentational seam. */
+    protected function shareStorefrontCartCount(): void
+    {
+        View::composer('storefront.*', function ($view) {
+            if (! request()->hasCookie(StorefrontCart::COOKIE) && ! auth('customer')->check()) {
+                $view->with('cartItemCount', 0);
+
+                return;
+            }
+
+            $cart = StorefrontCart::current(request(), app(CartService::class));
+            $view->with('cartItemCount', $cart->items->sum('qty'));
+        });
     }
 
     /**

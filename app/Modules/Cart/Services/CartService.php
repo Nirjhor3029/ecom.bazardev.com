@@ -12,6 +12,11 @@ use Illuminate\Validation\ValidationException;
 
 class CartService
 {
+    public function findItemOrFail(int $itemId): CartItem
+    {
+        return CartItem::query()->findOrFail($itemId);
+    }
+
     public function getOrCreate(?string $token, ?Customer $customer = null): Cart
     {
         // An authenticated customer's cart is keyed by customer_id first —

@@ -59,4 +59,19 @@ class Product extends Model
     {
         return $this->variants->firstWhere('is_default', true) ?? $this->variants->first();
     }
+
+    /** @return array{min: int, max: int} */
+    public function priceRange(): array
+    {
+        $prices = $this->variants->where('is_active', true)->map(fn (ProductVariant $v) => $v->effectivePrice());
+
+        return ['min' => $prices->min() ?? 0, 'max' => $prices->max() ?? 0];
+    }
+
+    public function primaryImageUrl(): ?string
+    {
+        $media = $this->media->firstWhere('is_primary', true) ?? $this->media->first();
+
+        return $media?->media?->url();
+    }
 }

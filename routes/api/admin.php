@@ -17,7 +17,10 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+// Named "admin.*" throughout: apiResource's auto-generated names (products.index,
+// etc.) would otherwise collide with the storefront's identically-named Blade
+// routes in the same global name table (web.php and api.php share one namespace).
+Route::middleware('auth:sanctum')->name('admin.')->group(function () {
     Route::get('attribute-sets', [AttributeSetController::class, 'index']);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('brands', BrandController::class);

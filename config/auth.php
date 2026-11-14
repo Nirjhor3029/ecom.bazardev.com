@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Modules\Customers\Models\Customer;
 
 return [
 
@@ -42,6 +43,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // Session-based guard for the Blade storefront (PRD §6: same
+        // Customer model as the API, but the storefront never calls its
+        // own API — it uses this guard + the Cart/Checkout services directly).
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
     ],
 
     /*
@@ -71,6 +80,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => Customer::class,
+        ],
     ],
 
     /*
