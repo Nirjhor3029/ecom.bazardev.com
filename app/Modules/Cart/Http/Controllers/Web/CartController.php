@@ -29,6 +29,11 @@ class CartController extends Controller
         try {
             $carts->addItem($cart, $request->integer('variant_id'), $request->integer('qty'));
 
+            // PDP "এখনই কিনুন": same add-to-cart, then straight to checkout.
+            if ($request->boolean('buy_now')) {
+                return redirect()->route('checkout.show');
+            }
+
             return back()->with('success', 'Added to cart.');
         } catch (\App\Exceptions\ApiException $e) {
             return back()->withErrors(['cart' => $e->getMessage()]);

@@ -37,6 +37,9 @@ class ProductController extends Controller
             ->with(['variants.inventoryItem', 'media.media'])
             ->limit(4)->get();
 
-        return view('storefront.products.show', compact('product', 'related'));
+        $rating = $product->ratingSummary();
+        $reviews = $product->reviews()->with('customer')->limit(6)->get();
+
+        return view('storefront.products.show', compact('product', 'related', 'rating', 'reviews'));
     }
 }

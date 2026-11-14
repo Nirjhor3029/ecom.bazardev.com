@@ -14,7 +14,7 @@ class Product extends Model
     protected $fillable = [
         'attribute_set_id', 'category_id', 'brand_id', 'name', 'slug',
         'short_desc', 'description', 'status', 'type', 'attributes',
-        'tags', 'seo', 'published_at',
+        'tags', 'seo', 'content', 'published_at',
     ];
 
     protected function casts(): array
@@ -26,8 +26,45 @@ class Product extends Model
             'attributes' => 'json', // non-variant attribute values, keyed by attribute code
             'tags' => 'json',
             'seo' => 'json',
+            'content' => 'json', // PDP storytelling blocks (see DemoCatalogSeeder for the shape)
             'published_at' => 'datetime',
         ];
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class)->where('status', 'approved')->latest();
+    }
+
+    /**
+     * Approved-review summary for the storefront: average, count and 1–5★ percentages.
+     *
+     * @return array{avg: float, count: int, dist: array<int, int>}
+     */
+    public function ratingSummary(): array
+    {
+        $counts = $this->reviews()->reorder()->selectRaw('rating, count(*) as c')->groupBy('rating')->pluck('c', 'rating');
+        $total = (int) $counts->sum();
+        $avg = $total ? round($counts->map(fn ($c, $r) => $c * $r)->sum() / $total, 1) : 0.0;
+        $dist = [];
+        foreach ([5, 4, 3, 2, 1] as $star) {
+            $dist[$star] = $total ? (int) round(($counts[$star] ?? 0) / $total * 100) : 0;
+        }
+
+        return ['avg' => $avg, 'count' => $total, 'dist' => $dist];
+    }
+
+    /** Gallery photos only (videos are exposed separately via videoUrl()). */
+    public function galleryImages(): \Illuminate\Support\Collection
+    {
+        return $this->media->filter(fn (ProductMedia $m) => $m->media && $m->media->kind() === 'image')->values();
+    }
+
+    public function videoUrl(): ?string
+    {
+        $video = $this->media->first(fn (ProductMedia $m) => $m->media?->kind() === 'video');
+
+        return $video?->media?->url();
     }
 
     public function attributeSet(): BelongsTo
