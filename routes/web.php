@@ -12,4 +12,13 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
     Route::get('login', fn () => view('admin.login'))->name('admin.login');
     Route::get('/', fn () => view('admin.dashboard'))->name('admin.dashboard');
+
+    Route::get('categories', fn () => view('admin.categories.index'));
+
+    Route::get('products', fn () => view('admin.products.index'));
+    Route::get('products/create', fn () => view('admin.products.form', ['productId' => null]));
+    Route::get('products/{product}/edit', fn ($product) => view('admin.products.form', ['productId' => (int) $product]));
+
+    Route::get('orders', fn () => view('admin.orders.index'));
+    Route::get('orders/{order}', fn ($order) => view('admin.orders.show', ['orderId' => (int) $order]));
 });
